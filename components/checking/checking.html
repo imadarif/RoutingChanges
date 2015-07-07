@@ -1,0 +1,207 @@
+<section layout="row" flex>
+    <div layout="vertical">
+        <md-sidenav class="md-sidenav-right md-whiteframe-z2 checking1" md-component-id="right">
+            <md-content ng-controller="RightCtrl" layout-padding>
+                <md-tabs md-dynamic-height md-border-bottom>
+                    <md-tab label="Projects">
+                        <md-content class="md-padding">
+                            <md-list>
+                                <md-list-item class="md-3-line" ng-repeat="project in checking.projectDetail">
+                                    <div class="md-list-item-text">
+                                        <h3>{{ project.projectname }}</h3>
+                                        <label>Over Due</label>    |     <label>Due Soon</label>
+                                        <h4>{{ project.overdue }}</h4>  <h4>{{ project.duesoon }}</h4>
+                                        <label>Members</label>
+                                        <p>{{ project.members }}</p>
+                                        <label>Tasks</label>
+                                        <p>{{ project.tasks }}</p>
+                                    </div>
+                                </md-list-item>
+                                </md-list>
+                        </md-content>
+                    </md-tab>
+
+                    <md-tab label="My Tasks">
+                        <md-content class="md-padding">
+                            <h1 class="md-display-2">My Tasks</h1>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim rutrum enim, vel tempor sapien arcu a tellus. Vivamus convallis sodales ante varius gravida. Curabitur a purus vel augue ultrices ultricies id a nisl. Nullam malesuada consequat diam, a facilisis tortor volutpat et. Sed urna dolor, aliquet vitae posuere vulputate, euismod ac lorem. Sed felis risus, pulvinar at interdum quis, vehicula sed odio. Phasellus in enim venenatis, iaculis tortor eu, bibendum ante. Donec ac tellus dictum neque volutpat blandit. Praesent efficitur faucibus risus, ac auctor purus porttitor vitae. Phasellus ornare dui nec orci posuere, nec luctus mauris semper.</p>
+                        </md-content>
+                    </md-tab>
+
+                    <md-tab label="Closed Tasks">
+                        <md-content class="md-padding">
+                            <h1 class="md-display-2">Closed Tasks</h1>
+                            <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                        </md-content>
+                    </md-tab>
+                </md-tabs>
+            </md-content>
+            <div class="sideNav-add-position">
+                <section layout="row" layout-sm="column" layout-align="center center">
+                    <md-button class="md-fab" ng-click="checking.addproject($event)">
+                        <ng-md-icon  icon="add" style="fill: white; margin: 19px auto !important;" size="20" ></ng-md-icon>
+                    </md-button>
+                </section>
+            </div>
+        </md-sidenav>
+    </div>
+</section>
+
+<!--<md-toolbar>-->
+    <!--<div class="md-toolbar-tools">-->
+        <!--<h2>-->
+            <!--<span>Task Assigner</span>-->
+        <!--</h2>-->
+
+        <!--<span flex></span>-->
+
+        <!--<md-button class="md-icon-button" aria-label="More" ng-click="checking.add($event)">-->
+            <!--<ng-md-icon icon="add" style="fill: white" size="20" ></ng-md-icon>-->
+        <!--</md-button>-->
+    <!--</div>-->
+<!--</md-toolbar>-->
+
+<md-toolbar style="background-color: white ;border-bottom: 1px solid #cccccc;">
+
+        <div class="md-toolbar-tools" id="hello">
+        <md-select ng-change="checking.Select(project.$id)" ng-model="project" md-on-open="checking.loadUsers()" style="width: 200px; color: grey">
+            <md-select-label >{{ project ? project.$id : 'Project Name' }}</md-select-label>
+            <md-option ng-value="project" ng-repeat="project in checking.projects">{{project.$id}}</md-option>
+        </md-select>
+
+        <div class="search-box-cont">
+            <md-autocomplete
+                    ng-disabled="checking.isDisabled"
+
+                    md-selected-item="checking.selectedItem"
+                    md-search-text-change="checking.searchTextChange(checking.searchText)"
+                    md-search-text="checking.searchText"
+                    md-selected-item-change="checking.selectedItemChange(item)"
+                    md-items="item in checking.querySearch(checking.searchText)"
+                    md-item-text="item.display"
+                    md-min-length="0"
+                    placeholder="Search"
+                    class="search-box">
+
+                <md-item-template>
+                    <span class="item-title">
+                        <md-icon md-svg-icon="img/icons/octicon-repo.svg"></md-icon>
+                        <span> {{item.name}} </span>
+                    </span>
+
+                    <span class="item-metadata">
+                        <span class="item-metastat">
+                            <strong>{{item.watchers}}</strong> watchers
+                        </span>
+
+                        <span class="item-metastat">
+                            <strong>{{item.forks}}</strong> forks
+                        </span>
+                    </span>
+                </md-item-template>
+
+            </md-autocomplete>
+        </div>
+
+        <span flex></span>
+
+        <md-button class="md-raised md-primary" ng-click="checking.fire()" >
+            BUTTON 1<!--<md-icon md-svg-icon="img/icons/favorite.svg" style="color: greenyellow;"></md-icon>-->
+        </md-button>
+
+        <ng-md-icon icon="menu" style="fill: grey" size="24" ng-click="checking.toggleRight()"></ng-md-icon>
+    </div>
+</md-toolbar>
+
+
+
+        <div layout="row" style=" background-color: #f2efef ;" flex >
+
+            <md-list ng-repeat="(listName, list) in checking.models.lists"  class="list-style" >
+                    <md-card id="card-alignment" style="max-height: 595px;">
+
+                    <!--<md-card-content style=" max-height: 607px;-->
+                                              <!--overflow: auto;-->
+                                              <!--padding: 0;">-->
+
+                        <md-toolbar  layout="row" class={{checking.toolbarColor[$index]}}>
+                            <div>
+                                <h2 class="md-toolbar-tools" >
+                                    <span> {{ listName | cardHeadFilter }}</span> <span style="color: grey;"> 0</span>
+                                </h2>
+                            </div>
+
+
+                            <div class="color-dialog-position"  >
+                                <md-select class="md-toolbar-tools custom-md-select" ng-model="">
+
+                                    <md-option>Rename Column</md-option>
+                                    <md-option>Delete Column</md-option>
+
+                                    <div style="border-top: 1px solid #cccccc">
+                                        <svg ng-repeat="color in checking.colors.colour" class="circle1">
+                                            <circle  ng-click="checking.selectedColor(color,$index)" ng-attr-cx={{checking.colors.x}} ng-attr-cy={{checking.colors.y}} ng-attr-r={{checking.colors.r}} fill={{color}} />
+                                        </svg>
+                                        <!--<md-option class="circle1" ng-repeat="color in checking.colors"></md-option>-->
+                                    </div>
+                                </md-select>
+                            </div>
+
+                        </md-toolbar>
+
+
+                        <md-content style="background-color: #cccccc;">
+                            <ul dnd-list="list" style="padding: 0 5px 0 5px !important; " id="hell">
+                                <md-card  class="md-3-line checking" ng-repeat="item in list" dnd-draggable="item"
+                                         dnd-moved="list.splice($index, 1)"
+                                         dnd-effect-allowed="move"
+                                         dnd-selected="models.selected = item"
+                                         ng-class="{'selected': models.selected === item}">
+
+                                    <md-card-content>
+                                        <div class="md-list-item-text" >
+                                            <h3>{{item.title}}</h3>
+                                            <!--<p>{{item.desc}}</p>-->
+                                             <div>
+                                                 <ng-md-icon icon="visibility" style="fill: grey" size="20"></ng-md-icon>
+                                                 <ng-md-icon icon="menu" style="fill: grey" size="20"></ng-md-icon>
+                                                 <ng-md-icon icon="chat" style="fill: grey" size="20"></ng-md-icon>
+                                                 <ng-md-icon icon="attach_file" style="fill: grey" size="20"></ng-md-icon>
+                                             </div>
+                                        </div>
+                                    </md-card-content>
+
+                                </md-card>
+
+                            </ul>
+
+                        </md-content>
+                        <md-toolbar style="background-color: #cccccc">
+                            <div layout="column" layout-align="center center" id="testing-input" ng-click="checking.inputClick(listName,$index)">
+                                <div style="width: 100%">
+                                    <input placeholder="Create new task...." class="input-box">
+                                </div>
+
+                                <div  class="input-button-transition">
+
+                                    <input style="width: 100%">
+                                    <md-button class="md-raised md-primary" style="background-color: green">Create</md-button>
+                                    <md-button class="md-raised ">Cancel</md-button>
+                                </div>
+                            </div>
+                        </md-toolbar>
+                    <!--</md-card-content>-->
+
+
+
+
+                </md-card>
+
+            </md-list>
+
+        </div>
+
+
+
+
+
