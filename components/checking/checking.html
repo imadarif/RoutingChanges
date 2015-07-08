@@ -1,23 +1,32 @@
 <section layout="row" flex>
     <div layout="vertical">
         <md-sidenav class="md-sidenav-right md-whiteframe-z2 checking1" md-component-id="right">
-            <md-content ng-controller="RightCtrl" layout-padding>
+
+            <md-content ng-controller="RightCtrl">
                 <md-tabs md-dynamic-height md-border-bottom>
                     <md-tab label="Projects">
-                        <md-content class="md-padding">
-                            <md-list>
-                                <md-list-item class="md-3-line" ng-repeat="project in checking.projectDetail">
-                                    <div class="md-list-item-text">
+                        <md-content>
+                            <md-list id="Projects-desc">
+                                <md-list-item class="md-3-line" ng-repeat="project in checking.projectDetail" >
+                                    <div class="md-list-item-text" id="Projects" style="padding-left: 10px;">
                                         <h3>{{ project.projectname }}</h3>
-                                        <label>Over Due</label>    |     <label>Due Soon</label>
-                                        <h4>{{ project.overdue }}</h4>  <h4>{{ project.duesoon }}</h4>
-                                        <label>Members</label>
-                                        <p>{{ project.members }}</p>
-                                        <label>Tasks</label>
-                                        <p>{{ project.tasks }}</p>
+
+                                        <div>
+                                            <label>Over Due</label>    |     <label>Due Soon</label><br>
+                                            <label>{{ project.overdue }}</label>  <label>{{ project.duesoon }}</label>
+                                        </div>
+
+                                        <div>
+                                            <label>Members</label>
+                                            {{ project.members }}
+
+                                            <label>Tasks</label>
+                                            {{ project.tasks }}
+                                        </div>
+
                                     </div>
                                 </md-list-item>
-                                </md-list>
+                            </md-list>
                         </md-content>
                     </md-tab>
 
@@ -64,9 +73,9 @@
 <md-toolbar style="background-color: white ;border-bottom: 1px solid #cccccc;">
 
         <div class="md-toolbar-tools" id="hello">
-        <md-select ng-change="checking.Select(project.$id)" ng-model="project" md-on-open="checking.loadUsers()" style="width: 200px; color: grey">
-            <md-select-label >{{ project ? project.$id : 'Project Name' }}</md-select-label>
-            <md-option ng-value="project" ng-repeat="project in checking.projects">{{project.$id}}</md-option>
+        <md-select ng-change="checking.Select(createProject.$id)" ng-model="project" md-on-open="checking.loadUsers()" style="width: 200px; color: grey">
+            <md-select-label >{{ createProject ? createProject.$id : 'Project Name' }}</md-select-label>
+            <md-option ng-value="createProject" ng-repeat="project in checking.projects">{{project.$id}}</md-option>
         </md-select>
 
         <div class="search-box-cont">
@@ -124,7 +133,7 @@
                                               <!--overflow: auto;-->
                                               <!--padding: 0;">-->
 
-                        <md-toolbar  layout="row" class={{checking.toolbarColor[$index]}}>
+                        <md-toolbar  layout="row" class={{checking.toolbarColor[$index]}} id="toolbar-color">
                             <div>
                                 <h2 class="md-toolbar-tools" >
                                     <span> {{ listName | cardHeadFilter }}</span> <span style="color: grey;"> 0</span>
@@ -138,9 +147,13 @@
                                     <md-option>Rename Column</md-option>
                                     <md-option>Delete Column</md-option>
 
-                                    <div style="border-top: 1px solid #cccccc">
+                                    <div style="border-top: 1px solid #cccccc; padding: 10px;padding-bottom: 0;">
                                         <svg ng-repeat="color in checking.colors.colour" class="circle1">
-                                            <circle  ng-click="checking.selectedColor(color,$index)" ng-attr-cx={{checking.colors.x}} ng-attr-cy={{checking.colors.y}} ng-attr-r={{checking.colors.r}} fill={{color}} />
+                                            <circle  ng-click="checking.selectedColor(color,$index)"
+                                                     ng-attr-cx={{checking.colors.x}}
+                                                     ng-attr-cy={{checking.colors.y}}
+                                                     ng-attr-r={{checking.colors.r}}
+                                                     fill={{color}} />
                                         </svg>
                                         <!--<md-option class="circle1" ng-repeat="color in checking.colors"></md-option>-->
                                     </div>
@@ -176,17 +189,20 @@
                             </ul>
 
                         </md-content>
+
+
                         <md-toolbar style="background-color: #cccccc">
                             <div layout="column" layout-align="center center" id="testing-input" ng-click="checking.inputClick(listName,$index)">
                                 <div style="width: 100%">
-                                    <input placeholder="Create new task...." class="input-box">
+                                    <input placeholder="Create new task...." class="input-box" ng-model="checking.task.taskInput">
                                 </div>
 
                                 <div  class="input-button-transition">
 
                                     <input style="width: 100%">
-                                    <md-button class="md-raised md-primary" style="background-color: green">Create</md-button>
-                                    <md-button class="md-raised ">Cancel</md-button>
+                                    <md-button class="md-raised md-primary" style="background-color: green" ng-click="checking.newTask(listName)">Create</md-button>
+                                    <md-button class="md-raised " ng-click="checking.cancelTask()">Cancel</md-button>
+
                                 </div>
                             </div>
                         </md-toolbar>

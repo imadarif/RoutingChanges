@@ -20,7 +20,7 @@ angular.module("task.controllers")
         }
     })
 
-    .controller("CheckingController", function($mdDialog, $timeout, retreiveData, $mdSidenav, $mdUtil, $log,$q) {
+    .controller("CheckingController", function($mdDialog, $timeout, retreiveData, $mdSidenav, $mdUtil, $log,$q,addTask) {
         var test = "";
 
 
@@ -31,6 +31,7 @@ angular.module("task.controllers")
         };
 
         $scope.toolbarColor = ["pink","blue","green","red"];
+
 
 
         var getView = function (obj) {
@@ -59,6 +60,12 @@ angular.module("task.controllers")
 
         $scope.selectedColor = function(color,index){
             console.log("selected color is : " + color + " index is : " + index);
+
+            var checkingElement = angular.element( document.querySelector('#toolbar-color'));
+
+
+            checkingElement.style.backgroundColor = color;
+
         }
 
         $scope.fire = function () {
@@ -70,7 +77,6 @@ angular.module("task.controllers")
         }
 
         $scope.inputClick = function(listName,index){
-            console.log(listName);
             var element = angular.element(document.querySelector('#testing-input'));
            console.log(element);
             var child1 = element.children(1);
@@ -86,7 +92,7 @@ angular.module("task.controllers")
 
 
 
-        //side menu projects we have to just bind the service here.
+        //side menu projects
         $scope.projectDetail = [
             {
                 projectname : "User Experience Design",
@@ -251,8 +257,26 @@ angular.module("task.controllers")
                 controller: NewProjectController,
                 templateUrl: 'components/templates/newProjectDailog.html',
                 targetEvent: ev
-            });
+            })
+                .then(function(projectName){
+
+                    console.log("createProject name: " + projectName);
+                    addTask.createProject(projectName);
+                },function(){
+                    console.log("reject");
+                });
         };
+
+        $scope.task = {}
+
+        $scope.newTask = function(listName){
+            console.log(listName)
+            addTask.createTask(listName,$scope.task)
+        }
+
+        $scope.cancelTask = function(){
+
+        }
 
         var vm = this;
         vm.notificationsEnabled = true;
@@ -273,12 +297,14 @@ angular.module("task.controllers")
 
 
 
+
+
     })
 
 
 
-    .controller('RightCtrl', function ($timeout, $mdSidenav, $log) {
-        var $scope = this;
+    .controller('RightCtrl', function ($scope,$timeout, $mdSidenav, $log) {
+
         $scope.close = function () {
             $mdSidenav('right').close()
                 .then(function () {
@@ -306,30 +332,22 @@ angular.module("task.controllers")
 
 
 
-    function NewProjectController($mdDialog, addTask) {
+    function NewProjectController($scope,$mdDialog) {
 
-    var $scope = this;
 
-    $scope.initializeGroup = {};
 
-    $scope.cancel = function (ev) {
-        alert('hi');
+     //$scope.initializeGroup = {};
+
+    $scope.cancel = function () {
+        console.log("cancel");
         $mdDialog.cancel();
     };
 
-    $scope.save = function (ev) {
-        alert('bye');
-        addTask.taskInfo($scope.initializeGroup);
-        $mdDialog.hide();
-/*
-        " ".go("form");
-*/
+    $scope.save = function (projectName) {
+        console.log(projectName);
+        $mdDialog.hide(projectName);
     }
 }
-
-
-
-
 
 
 

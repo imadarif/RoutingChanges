@@ -74,12 +74,12 @@ md-list-item.md-no-proxy, md-list-item .md-no-style {
     }
 }
 
-/*select project page*/
+/*select createProject page*/
 .carddemoBasicUsage md-card {
     min-height: 150px;
 }
 
-/*select project select menu*/
+/*select createProject select menu*/
 .selectdemoOptionsWithAsyncSearch p {
     padding: 0 20px;
     text-align: center; }
@@ -88,10 +88,10 @@ md-list-item.md-no-proxy, md-list-item .md-no-style {
     color: #777; }
 .selectdemoOptionsWithAsyncSearch .demo-content {
     min-height: 348px; }
-
+/*
 md-content {
     height: 88% !important;
-}
+}*/
 
 .checking {
     margin: 0 0 8px 0 !important;
@@ -275,3 +275,40 @@ md-content {
 .red{
     background-color: orangered;
 }
+
+
+
+
+#Projects h3 {
+    font-size: 16px;
+    font-weight: bold;
+}
+#Projects label {
+    padding-left: 10px;
+    padding-right: 5px;
+}
+
+#Projects div label:nth-child(1) {
+    padding-left: 0;
+}
+
+
+#Projects div:nth-child(2) {
+    display: block;
+    padding: 5px 0 0 0;
+    font-size: small;
+}
+
+
+
+#Projects div:nth-child(3) {
+    position: absolute;
+    right: 15px;
+    font-size: small;
+}
+
+
+#Projects-desc md-list-item:nth-child(odd) {
+    background-color: #26C6DA;
+}
+

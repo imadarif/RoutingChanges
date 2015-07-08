@@ -4,12 +4,46 @@ angular.module('task.services')
         var groupTasksRef = "https://panacloudmodule.firebaseio.com/group-tasks";
 
         var path = "";
-        var ref ;
-        var taskId ;
-
+        var ref;
+        var taskId;
+        var projectId;
 
         return {
+            createProject: function (projectName) {
+                console.log(projectName)
+                var projectRef = groupTasksRef + '/' + 'panacloud' + '/' + 'panaswift'
 
+                ref = new Firebase(projectRef);
+                projectId = ref.push();
+
+                projectId.set({
+                    title: projectName,
+                    desc: ""
+                })
+                console.log(projectId)
+            },
+
+            createTask: function(listName,task) {
+                path = projectId.toString();
+
+                ref = new Firebase(path  + '/' +listName);
+
+                ref.push({
+                    title: task.taskInput
+                })
+            }
+
+        }
+    });
+
+
+
+
+
+
+
+
+/*
             taskInfo:function (task) {
                 var taskRef = groupTasksRef + '/' + task.groupId + '/' + task.data + '-task';
 
@@ -65,4 +99,4 @@ angular.module('task.services')
                 })
             }
         }
-    });
+    });*/

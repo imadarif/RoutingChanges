@@ -18,7 +18,7 @@ angular.module('task.services')
                 var that = this;
                 var numOfNodes;
 
-                //changes required for other project.
+                //changes required for other createProject.
                 path += '/' + grpName;
                 console.log(path);
 
