@@ -124,36 +124,36 @@
 
 
 
-        <div layout="row" style=" background-color: #f2efef ;" flex >
+        <div layout="row" style=" background-color: #f2efef ;" flex id="mainCart">
 
             <md-list ng-repeat="(listName, list) in checking.models.lists"  class="list-style" >
-                    <md-card id="card-alignment" style="max-height: 595px;">
+                    <md-card id="card-alignment" style="max-height: 595px;" ng-init=" Outerindex = $index ">
 
                     <!--<md-card-content style=" max-height: 607px;-->
                                               <!--overflow: auto;-->
                                               <!--padding: 0;">-->
 
-                        <md-toolbar  layout="row" class={{checking.toolbarColor[$index]}} id="toolbar-color">
+                        <md-toolbar  layout="row" class="md-accent" >
                             <div>
                                 <h2 class="md-toolbar-tools" >
-                                    <span> {{ listName | cardHeadFilter }}</span> <span style="color: grey;"> 0</span>
+                                    <span> {{ listName }}</span> <span style="color: grey;"> 0</span>
                                 </h2>
                             </div>
 
 
-                            <div class="color-dialog-position"  >
-                                <md-select class="md-toolbar-tools custom-md-select" ng-model="">
+                            <div class="color-dialog-position">
+                                <md-select class="md-toolbar-tools custom-md-select" ng-model=""  >
 
                                     <md-option>Rename Column</md-option>
                                     <md-option>Delete Column</md-option>
 
                                     <div style="border-top: 1px solid #cccccc; padding: 10px;padding-bottom: 0;">
                                         <svg ng-repeat="color in checking.colors.colour" class="circle1">
-                                            <circle  ng-click="checking.selectedColor(color,$index)"
-                                                     ng-attr-cx={{checking.colors.x}}
-                                                     ng-attr-cy={{checking.colors.y}}
-                                                     ng-attr-r={{checking.colors.r}}
-                                                     fill={{color}} />
+                                                <circle  ng-click="checking.selectedColor(color,$index,Outerindex)"
+                                                                ng-attr-cx={{checking.colors.x}}
+                                                                ng-attr-cy={{checking.colors.y}}
+                                                                ng-attr-r={{checking.colors.r}}
+                                                                fill={{color}} />
                                         </svg>
                                         <!--<md-option class="circle1" ng-repeat="color in checking.colors"></md-option>-->
                                     </div>
@@ -192,16 +192,16 @@
 
 
                         <md-toolbar style="background-color: #cccccc">
-                            <div layout="column" layout-align="center center" id="testing-input" ng-click="checking.inputClick(listName,$index)">
+                            <div layout="column" layout-align="center center" id="testing-input" ng-click="checking.inputClick(listName,$index,Outerindex)">
                                 <div style="width: 100%">
-                                    <input placeholder="Create new task...." class="input-box" ng-model="checking.task.taskInput">
+                                    <input placeholder="Create new task...." class="input-box" >
                                 </div>
 
                                 <div  class="input-button-transition">
 
-                                    <input style="width: 100%">
+                                    <input style="width: 100%" ng-model="checking.task.taskInput">
                                     <md-button class="md-raised md-primary" style="background-color: green" ng-click="checking.newTask(listName)">Create</md-button>
-                                    <md-button class="md-raised " ng-click="checking.cancelTask()">Cancel</md-button>
+                                    <md-button class="md-raised " ng-click="checking.cancelTask(Outerindex)">Cancel</md-button>
 
                                 </div>
                             </div>

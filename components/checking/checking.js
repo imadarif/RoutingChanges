@@ -1,33 +1,39 @@
 angular.module("task.controllers")
 
+    //.config(function($mdThemingProvider) {
+    //    $mdThemingProvider.theme('default')
+    //        .primaryPalette('pink')
+    //        .accentPalette('orange');
+    //}
+    //)
 
-    .filter('cardHeadFilter', function() {
-        return function(obj) {
-            switch (obj) {
-                case "A":
-                    return "To Do";
-                    break;
-                case "B":
-                    return "Doing";
-                    break;
-                case "C":
-                    return "Review";
-                    break;
-                case "D":
-                    return "Done";
-                    break;
-            }
-        }
-    })
+    //.filter('cardHeadFilter', function() {
+    //    return function(obj) {
+    //        switch (obj) {
+    //            case "A":
+    //                return "To Do";
+    //                break;
+    //            case "B":
+    //                return "Doing";
+    //                break;
+    //            case "C":
+    //                return "Review";
+    //                break;
+    //            case "D":
+    //                return "Done";
+    //                break;
+    //        }
+    //    }
+    //})
 
     .controller("CheckingController", function($mdDialog, $timeout, retreiveData, $mdSidenav, $mdUtil, $log,$q,addTask) {
         var test = "";
 
-
+var index
         var $scope = this;
         $scope.models = {
             selected: null,
-            lists: {"A": [], "B": [],"C": [], "D": []}
+            lists: {"To Do": [], "Doing": [],"Review": [], "Done": []}
         };
 
         $scope.toolbarColor = ["pink","blue","green","red"];
@@ -58,32 +64,118 @@ angular.module("task.controllers")
                         colour: ["pink", "red", "green", "yellow", "blue"]
         }
 
-        $scope.selectedColor = function(color,index){
-            console.log("selected color is : " + color + " index is : " + index);
 
-            var checkingElement = angular.element( document.querySelector('#toolbar-color'));
+        $scope.selectedColor = function(color,index,ind){
+            console.log("selected color is : " + color + " index is : " + index + "list index " + ind);
 
 
-            checkingElement.style.backgroundColor = color;
+            var mainCartElement = angular.element( document.querySelector('#mainCart'));
+            console.log(mainCartElement);
+
+            var md_list_element = mainCartElement.children(1);
+            console.log(md_list_element);
+            console.log(md_list_element[ind]);
+
+            var md_card_element = md_list_element[ind].children;
+            console.log(md_card_element);
+
+
+            var md_toolbar_element = md_card_element[0].children;
+            console.log(md_toolbar_element);
+
+            var md_toolbar_change = md_toolbar_element[0];
+            console.log(md_toolbar_change);
+
+            md_toolbar_change.style.backgroundColor = color;
+
 
         }
 
-        $scope.fire = function () {
-            console.log("hello");
-            var checkingElement = angular.element( document.querySelector('#hello'));
-            checkingElement.addClass('hello');
-            console.log(checkingElement);
+        $scope.task = {}
 
+        $scope.newTask = function(listName){
+            console.log(listName)
+            addTask.createTask(listName,$scope.task)
         }
 
-        $scope.inputClick = function(listName,index){
-            var element = angular.element(document.querySelector('#testing-input'));
+        $scope.cancelTask = function(ind){
+
+
+            console.log(ind)
+            var mainCartElement = angular.element( document.querySelector('#mainCart'));
+            console.log(mainCartElement);
+
+            var md_list_element = mainCartElement.children(1);
+
+
+            var md_card_element = md_list_element[ind].children;
+            console.log(md_card_element);
+
+            var md_toolbar_element = md_card_element[0].children;
+
+            var md_toolbar_change = md_toolbar_element[2];
+            console.log(md_toolbar_change);
+
+            var md_main_cont = md_toolbar_change.children;
+
+            console.log(md_main_cont)
+
+
+            var md_input = md_main_cont[0].children;
+            console.log(md_input)
+
+            md_input[0].style.display = 'block';
+            md_input[1].className = 'input-button-transition';
+        }
+
+        $scope.inputClick = function(listName,index,ind){
+            var mainCartElement = angular.element( document.querySelector('#mainCart'));
+            console.log(mainCartElement);
+
+            var md_list_element = mainCartElement.children(1);
+
+
+            var md_card_element = md_list_element[ind].children;
+            console.log(md_card_element);
+
+            var md_toolbar_element = md_card_element[0].children;
+
+            var md_toolbar_change = md_toolbar_element[2];
+            console.log(md_toolbar_change);
+
+            var md_main_cont = md_toolbar_change.children;
+
+            console.log(md_main_cont)
+
+
+            var md_input = md_main_cont[0].children;
+            console.log(md_input)
+
+            md_input[0].style.display = 'none';
+            md_input[1].className= 'input-with-transition';
+
+            console.log(typeof($scope.task.taskInput))
+
+            $timeout(function () {
+
+                if ($scope.task.taskInput === undefined) {
+                    md_input[0].style.display = 'block';
+                    md_input[1].className = 'input-button-transition';
+                }
+
+            },5000)
+
+
+
+
+            /*var element = angular.element(document.querySelector('#testing-input'));
            console.log(element);
-            var child1 = element.children(1);
-
-            child1[0].style.display = 'none';
+            var child1 = element.children(1);*/
+/*
+         /*   console.log(child1)*!/
+            md_toolbar_element.style.display = 'none';
             console.log(child1[1]);
-            child1[1].className = ' input-with-transition';
+            md_toolbar_element.className = ' input-with-transition';*/
 
 
 
@@ -267,16 +359,7 @@ angular.module("task.controllers")
                 });
         };
 
-        $scope.task = {}
 
-        $scope.newTask = function(listName){
-            console.log(listName)
-            addTask.createTask(listName,$scope.task)
-        }
-
-        $scope.cancelTask = function(){
-
-        }
 
         var vm = this;
         vm.notificationsEnabled = true;
@@ -430,3 +513,16 @@ angular.module("task.controllers")
 //}
 
 // Generate initial model
+
+
+
+
+
+/*console.log("hello");
+ var checkingElement = angular.element( document.querySelector('#hello'));
+ checkingElement.addClass('hello');
+
+
+
+
+ console.log(checkingElement);*/

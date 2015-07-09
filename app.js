@@ -2,7 +2,6 @@ angular.module('task', ['ngNewRouter', 'task.controllers', 'task.services', 'dnd
 
 
 
-
     .controller('taskMainController', function($router) {
         $router.config([
             { path: '/', component: 'checking'},

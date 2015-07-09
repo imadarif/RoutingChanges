@@ -192,9 +192,8 @@ md-content {
 .circle1 {
     display: inline-block;
     /*border-radius: 50%;*/
-    width: 10px;
+    width: 20px;
     height: 20px;
-    padding: 0px 10px 0px 0px;
     margin-left: 5px;
     /*background-color: #000;*/
 }
@@ -310,5 +309,119 @@ md-content {
 
 #Projects-desc md-list-item:nth-child(odd) {
     background-color: #26C6DA;
+}
+
+
+
+
+
+
+/* Input Box*/
+
+
+
+.message {
+    color:#FFF;
+    position: absolute;
+    top: -95px;
+    left: 0;
+    width: 100%;
+    transition: top 600ms cubic-bezier(0.15, 0.04, 0.03, 0.94);
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+#toggle {
+    position:absolute;
+    appearance:none;
+    cursor:text;
+    left:-100%;
+    top:-100%;
+}
+
+#toggle  {
+    position:absolute;
+    cursor:text !important;
+    background: #26ae90;
+    width: 100px;
+    border-radius: 3px;
+    padding: 8px 10px;
+    color: #FFF;
+    line-height:20px;
+    font-size:12px;
+    text-align:center;
+    -webkit-font-smoothing: antialiased;
+    margin:20px 50px;
+    transition:all 500ms ease;
+}
+
+#toggle + label:before {
+    content:"Create new task..."
+}
+
+
+
+#toggle:checked ~ .message {
+    top: 0;
+}
+
+#input-toolbar md-toolbar {
+    min-height: 80px !important;
+    height: 80px !important;
+}
+
+
+/* Input Box*/
+
+
+
+.message {
+    color:#FFF;
+    position: absolute;
+    top: -95px;
+    left: 0;
+    width: 100%;
+    transition: top 600ms cubic-bezier(0.15, 0.04, 0.03, 0.94);
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+#toggle {
+    position:absolute;
+    appearance:none;
+    cursor:text;
+    left:-100%;
+    top:-100%;
+}
+
+#toggle  {
+    position:absolute;
+    cursor:text !important;
+    background: #26ae90;
+    width: 100px;
+    border-radius: 3px;
+    padding: 8px 10px;
+    color: #FFF;
+    line-height:20px;
+    font-size:12px;
+    text-align:center;
+    -webkit-font-smoothing: antialiased;
+    margin:20px 50px;
+    transition:all 500ms ease;
+}
+
+#toggle + label:before {
+    content:"Create new task..."
+}
+
+
+
+#toggle:checked ~ .message {
+    top: 0;
+}
+
+#input-toolbar md-toolbar {
+    min-height: 80px !important;
+    height: 80px !important;
 }
 
