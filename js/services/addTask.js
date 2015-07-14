@@ -24,6 +24,7 @@ angular.module('task.services')
             },
 
             createTask: function(listName,task) {
+
                 path = projectId.toString();
 
                 ref = new Firebase(path  + '/' +listName);

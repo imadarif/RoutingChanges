@@ -1,11 +1,7 @@
+'use strict'
 angular.module("task.controllers")
 
-    //.config(function($mdThemingProvider) {
-    //    $mdThemingProvider.theme('default')
-    //        .primaryPalette('pink')
-    //        .accentPalette('orange');
-    //}
-    //)
+
 
     //.filter('cardHeadFilter', function() {
     //    return function(obj) {
@@ -29,16 +25,52 @@ angular.module("task.controllers")
     .controller("CheckingController", function($mdDialog, $timeout, retreiveData, $mdSidenav, $mdUtil, $log,$q,addTask) {
         var test = "";
 
-var index
+        var index
         var $scope = this;
         $scope.models = {
             selected: null,
             lists: {"To Do": [], "Doing": [],"Review": [], "Done": []}
         };
 
+        $scope.addProjectList = function(ev){
+            $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'components/templates/createTask.html',
+                targetEvent: ev
+            }).then(function(Listname){
+/*
+                $scope.models.lists + '.' + Listname.toString() = []
+*/
+
+                $scope.models.lists[Listname] = [];
+                console.log("List name: " + Listname);
+             //   addTask.createProject(projectName);
+            },function(){
+                console.log("reject");
+            });
+        }
+
         $scope.toolbarColor = ["pink","blue","green","red"];
 
+        $scope.rename = function(ev,index){
+            $mdDialog.show({
+                controller: renameDialogController,
+                templateUrl: 'components/templates/renameDailog.html',
+                targetEvent: ev
+            }).then(function(newListname){
+                //$scope.models.lists[Listname] = [];
+                //$scope.models.lists[index]
+                console.log($scope.models.lists)
+               // console.log("List name: " + newListname);
+                //   addTask.createProject(projectName);
+            },function(){
+                console.log("reject");
+            });
+        }
 
+        $scope.delete = function(index){
+
+        }
 
         var getView = function (obj) {
             console.log(obj)
@@ -100,61 +132,60 @@ var index
 
         $scope.cancelTask = function(ind){
 
-
             console.log(ind)
             var mainCartElement = angular.element( document.querySelector('#mainCart'));
-            console.log(mainCartElement);
+           // console.log(mainCartElement);
 
             var md_list_element = mainCartElement.children(1);
 
 
             var md_card_element = md_list_element[ind].children;
-            console.log(md_card_element);
+           // console.log(md_card_element);
 
             var md_toolbar_element = md_card_element[0].children;
 
             var md_toolbar_change = md_toolbar_element[2];
-            console.log(md_toolbar_change);
+           // console.log(md_toolbar_change);
 
             var md_main_cont = md_toolbar_change.children;
 
-            console.log(md_main_cont)
+           // console.log(md_main_cont)
 
 
             var md_input = md_main_cont[0].children;
-            console.log(md_input)
+           // console.log(md_input)
 
-            md_input[0].style.display = 'block';
-            md_input[1].className = 'input-button-transition';
+            md_input[0].style.display = "block";
+            md_input[1].className = "input-button-transition"
         }
 
         $scope.inputClick = function(listName,index,ind){
             var mainCartElement = angular.element( document.querySelector('#mainCart'));
-            console.log(mainCartElement);
+           // console.log(mainCartElement);
 
             var md_list_element = mainCartElement.children(1);
 
 
             var md_card_element = md_list_element[ind].children;
-            console.log(md_card_element);
+          //  console.log(md_card_element);
 
             var md_toolbar_element = md_card_element[0].children;
 
             var md_toolbar_change = md_toolbar_element[2];
-            console.log(md_toolbar_change);
+           // console.log(md_toolbar_change);
 
             var md_main_cont = md_toolbar_change.children;
 
-            console.log(md_main_cont)
+           // console.log(md_main_cont)
 
 
             var md_input = md_main_cont[0].children;
-            console.log(md_input)
+           // console.log(md_input)
 
             md_input[0].style.display = 'none';
             md_input[1].className= 'input-with-transition';
 
-            console.log(typeof($scope.task.taskInput))
+           //    console.log(typeof($scope.task.taskInput))
 
             $timeout(function () {
 
@@ -244,7 +275,7 @@ var index
         $scope.loadUsers = function() {
             $scope.projects = [];
             return $timeout(function() {
-                $scope.projects = retreiveData.getGroups();
+                $scope.projects = retreiveData.getSubGroupTask();
                 console.log($scope.projects)
 
 
@@ -384,8 +415,6 @@ var index
 
     })
 
-
-
     .controller('RightCtrl', function ($scope,$timeout, $mdSidenav, $log) {
 
         $scope.close = function () {
@@ -396,24 +425,24 @@ var index
         }
     })
 
-    function DialogController($mdDialog, addTask) {
-        var $scope = this;
-        $scope.initializeGroup = {};
+    function DialogController($scope,$mdDialog, addTask) {
+
+       $scope.initialize = {};
 
         $scope.cancel = function () {
             $mdDialog.cancel();
+            console.log("cancel");
         };
 
-        $scope.save = function () {
-            addTask.taskInfo($scope.initializeGroup);
-            $mdDialog.hide();
+        $scope.save = function (Listname) {
+            //addTask.taskInfo($scope.initializeGroup);
+            console.log($scope.initialize.list);
+            $mdDialog.hide($scope.initialize.list);
 /*
             " ".go("form");
 */
         }
     }
-
-
 
     function NewProjectController($scope,$mdDialog) {
 
@@ -432,7 +461,24 @@ var index
     }
 }
 
+    function renameDialogController($scope,$mdDialog, addTask) {
 
+    $scope.list = {};
+
+    $scope.cancel = function () {
+        $mdDialog.cancel();
+        console.log("cancel");
+    };
+
+    $scope.save = function (index) {
+        //addTask.taskInfo($scope.initializeGroup);
+        console.log($scope.list.name);
+        $mdDialog.hide($scope.list.name);
+        /*
+         " ".go("form");
+         */
+    }
+}
 
 
 

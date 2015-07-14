@@ -1,14 +1,14 @@
 angular.module('task.services')
     .factory('retreiveData', function($timeout,$firebaseArray) {
-        var ref = new Firebase("https://panacloudmodule.firebaseio.com/group-tasks");
-
+        //var ref = new Firebase("https://panacloudmodule.firebaseio.com/group-tasks");
+        var ref = new Firebase("https://panacloudmodule.firebaseio.com/group-tasks/" + 'panacloud' + '/' + 'panaswift');
         var grpPath;
 
         var path = "https://panacloudmodule.firebaseio.com/group-tasks"
         var ret = [];
 
         return {
-            getGroups: function() {
+            getSubGroupTask: function() {
                 var keyObj = $firebaseArray(ref);
 
                 return keyObj

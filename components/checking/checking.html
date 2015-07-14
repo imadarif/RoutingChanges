@@ -114,7 +114,7 @@
 
         <span flex></span>
 
-        <md-button class="md-raised md-primary" ng-click="checking.fire()" >
+        <md-button class="md-raised md-primary" ng-click="checking.addProjectList(ev)">
             BUTTON 1<!--<md-icon md-svg-icon="img/icons/favorite.svg" style="color: greenyellow;"></md-icon>-->
         </md-button>
 
@@ -133,7 +133,7 @@
                                               <!--overflow: auto;-->
                                               <!--padding: 0;">-->
 
-                        <md-toolbar  layout="row" class="md-accent" >
+                        <md-toolbar  layout="row" class="md-primary md-hue-3 " >
                             <div>
                                 <h2 class="md-toolbar-tools" >
                                     <span> {{ listName }}</span> <span style="color: grey;"> 0</span>
@@ -142,10 +142,10 @@
 
 
                             <div class="color-dialog-position">
-                                <md-select class="md-toolbar-tools custom-md-select" ng-model=""  >
+                                <md-select class="md-toolbar-tools custom-md-select" ng-model="">
 
-                                    <md-option>Rename Column</md-option>
-                                    <md-option>Delete Column</md-option>
+                                    <md-option ng-click="checking.rename($event,Outerindex)" >Rename Column</md-option>
+                                    <md-option ng-click="checking.delete(Outerindex)">Delete Column</md-option>
 
                                     <div style="border-top: 1px solid #cccccc; padding: 10px;padding-bottom: 0;">
                                         <svg ng-repeat="color in checking.colors.colour" class="circle1">
@@ -191,6 +191,8 @@
                         </md-content>
 
 
+
+
                         <md-toolbar style="background-color: #cccccc">
                             <div layout="column" layout-align="center center" id="testing-input" ng-click="checking.inputClick(listName,$index,Outerindex)">
                                 <div style="width: 100%">
@@ -206,7 +208,7 @@
                                 </div>
                             </div>
                         </md-toolbar>
-                    <!--</md-card-content>-->
+                    </md-card-content>
 
 
 
