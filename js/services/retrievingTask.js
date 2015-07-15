@@ -65,12 +65,12 @@ angular.module('task.services')
                 for(var i in obj) {
                     check.push(path + '/' + obj[i] + '/')
                     phaseDataRef = new Firebase(check[i]);
-                    console.log(phaseDataRef)
+
                     ret.push({
                         taskRef : $firebaseArray(phaseDataRef)
                     });
                 }
-                console.log(ret)
+              
 
             },
 

@@ -82,17 +82,6 @@ angular.module("task.controllers")
             console.log(obj)
 
 
-
-
-            //$scope.data.push({
-            //    Data : addTask.getProjectData()
-            //})
-            //
-            //
-            //console.log($scope.data[0].Data)
-            //for( var dat in $scope.data[0].Data){
-            //    console.log(dat[1].title);
-            //}
             var j = 0;
 
             //for(var key in $scope.models.lists) {
@@ -179,6 +168,8 @@ angular.module("task.controllers")
         }
 
         $scope.inputClick = function(ind){
+
+            console.log(ind)
             var mainCartElement = angular.element( document.querySelector('#mainCart'));
             console.log(mainCartElement);
 
@@ -417,29 +408,6 @@ angular.module("task.controllers")
                     console.log("reject");
                 });
         };
-
-
-
-        //var vm = this;
-        //vm.notificationsEnabled = true;
-        //vm.toggleNotifications = function() {
-        //    vm.notificationsEnabled = !vm.notificationsEnabled;
-        //};
-        //vm.redial = function(e) {
-        //    $mdDialog.show(
-        //        $mdDialog.alert()
-        //            .title('Suddenly, a redial')
-        //            .content('You just called someone back. They told you the most amazing story that has ever been told. Have a cookie.')
-        //            .ok('That was easy')
-        //    );
-        //};
-        //vm.checkVoicemail = function() {
-        //    // This never happens.
-        //};
-
-
-
-
 
     })
 

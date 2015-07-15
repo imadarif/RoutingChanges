@@ -324,7 +324,7 @@ md-content {
     color:#FFF;
     position: absolute;
     top: -95px;
-    left: 0;
+
     width: 100%;
     transition: top 600ms cubic-bezier(0.15, 0.04, 0.03, 0.94);
     overflow: hidden;
@@ -332,9 +332,9 @@ md-content {
 }
 
 #toggle {
-    position:absolute;
+
     appearance:none;
-    cursor:text;
+
     left:-100%;
     top:-100%;
 }

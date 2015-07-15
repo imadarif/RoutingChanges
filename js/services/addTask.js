@@ -9,6 +9,7 @@ angular.module('task.services')
         var projectId;
         var list
         return {
+            //this method is for testing dont remove
             getProjectData: function(){
                 var projectRef = groupTasksRef + '/' + 'panacloud' + '/' + 'panaswift'
 
@@ -24,35 +25,37 @@ angular.module('task.services')
                 var projectRef = groupTasksRef + '/' + 'panacloud' + '/' + 'panaswift'
 
                 ref = new Firebase(projectRef);
-               // projectId = ref.push()
-
-                 list = $firebaseArray(ref);
-                list.$add({
-                    title: projectName,
-                    desc: "",
-                    lists: {
-                        "To Do": "",
-                        "Doing": "",
-                        "Review": "",
-                        "Done": ""
-                    }
-                }).then(function(ref) {
-                    var id = ref.key();
-                    console.log("added record with id " + id);
-                    list.$indexFor(id); // returns location in the array
-                });
+                projectId = ref.push()
 
 
-                //projectId.set({
+                //dont remove below comment
+                // list = $firebaseArray(ref);
+                //list.$add({
                 //    title: projectName,
                 //    desc: "",
-                //   lists: {
-                //            "To Do": "",
-                //            "Doing": "",
-                //            "Review": "",
-                //            "Done": ""
-                //        }
-                //})
+                //    lists: {
+                //        "To Do": "",
+                //        "Doing": "",
+                //        "Review": "",
+                //        "Done": ""
+                //    }
+                //}).then(function(ref) {
+                //    var id = ref.key();
+                //    console.log("added record with id " + id);
+                //    list.$indexFor(id); // returns location in the array
+                //});
+
+
+                projectId.set({
+                    title: projectName,
+                    desc: "",
+                   lists: {
+                            "To Do": "",
+                            "Doing": "",
+                            "Review": "",
+                            "Done": ""
+                        }
+                })
 
                 console.log(projectId)
             },
