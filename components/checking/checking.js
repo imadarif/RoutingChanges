@@ -178,28 +178,37 @@ angular.module("task.controllers")
             md_input[1].className = "input-button-transition"
         }
 
-        $scope.inputClick = function(listName,index,ind){
+        $scope.inputClick = function(ind){
             var mainCartElement = angular.element( document.querySelector('#mainCart'));
-           // console.log(mainCartElement);
+            console.log(mainCartElement);
 
             var md_list_element = mainCartElement.children(1);
 
-
             var md_card_element = md_list_element[ind].children;
-          //  console.log(md_card_element);
+            console.log(md_card_element);
 
             var md_toolbar_element = md_card_element[0].children;
+            console.log(md_toolbar_element);
 
+
+            var md_content_data = md_toolbar_element[1].children;
+            console.log(md_content_data);
+
+            var md_toolbar_input = md_content_data[1].children;
+            console.log(md_toolbar_input);
+
+
+
+
+            /*
             var md_toolbar_change = md_toolbar_element[2];
-           // console.log(md_toolbar_change);
+            console.log(md_toolbar_change);*/
 
-            var md_main_cont = md_toolbar_change.children;
+            /*var md_main_cont = md_toolbar_change.children;
 
-           // console.log(md_main_cont)
-
-
-            var md_input = md_main_cont[0].children;
-           // console.log(md_input)
+            console.log(md_main_cont)
+*/
+            /*
 
             md_input[0].style.display = 'none';
             md_input[1].className= 'input-with-transition';
@@ -213,7 +222,7 @@ angular.module("task.controllers")
                     md_input[1].className = 'input-button-transition';
                 }
 
-            },5000)
+            },5000)*/
 
 
 
