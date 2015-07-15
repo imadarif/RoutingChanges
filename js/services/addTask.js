@@ -1,25 +1,59 @@
 angular.module('task.services')
 
-    .factory('addTask', function() {
+    .factory('addTask', function($firebaseArray) {
         var groupTasksRef = "https://panacloudmodule.firebaseio.com/group-tasks";
 
         var path = "";
         var ref;
         var taskId;
         var projectId;
-
+        var list
         return {
+            getProjectData: function(){
+                var projectRef = groupTasksRef + '/' + 'panacloud' + '/' + 'panaswift'
+
+                ref = new Firebase(projectRef);
+                // projectId = ref.push()
+
+                list = $firebaseArray(ref);
+              return list
+            },
+
             createProject: function (projectName) {
                 console.log(projectName)
                 var projectRef = groupTasksRef + '/' + 'panacloud' + '/' + 'panaswift'
 
                 ref = new Firebase(projectRef);
-                projectId = ref.push();
+               // projectId = ref.push()
 
-                projectId.set({
+                 list = $firebaseArray(ref);
+                list.$add({
                     title: projectName,
-                    desc: ""
-                })
+                    desc: "",
+                    lists: {
+                        "To Do": "",
+                        "Doing": "",
+                        "Review": "",
+                        "Done": ""
+                    }
+                }).then(function(ref) {
+                    var id = ref.key();
+                    console.log("added record with id " + id);
+                    list.$indexFor(id); // returns location in the array
+                });
+
+
+                //projectId.set({
+                //    title: projectName,
+                //    desc: "",
+                //   lists: {
+                //            "To Do": "",
+                //            "Doing": "",
+                //            "Review": "",
+                //            "Done": ""
+                //        }
+                //})
+
                 console.log(projectId)
             },
 

@@ -25,7 +25,7 @@ angular.module("task.controllers")
     .controller("CheckingController", function($mdDialog, $timeout, retreiveData, $mdSidenav, $mdUtil, $log,$q,addTask) {
         var test = "";
 
-        var index
+
         var $scope = this;
         $scope.models = {
             selected: null,
@@ -50,6 +50,9 @@ angular.module("task.controllers")
             });
         }
 
+
+        //$scope.toolbarColor = ["md-primary","md-warn","md-raised","md-accent"];
+
         $scope.toolbarColor = ["pink","blue","green","red"];
 
         $scope.rename = function(ev,index){
@@ -72,21 +75,37 @@ angular.module("task.controllers")
 
         }
 
+        $scope.data = []
+
         var getView = function (obj) {
+            console.log("in getview method ")
             console.log(obj)
+
+
+
+
+            //$scope.data.push({
+            //    Data : addTask.getProjectData()
+            //})
+            //
+            //
+            //console.log($scope.data[0].Data)
+            //for( var dat in $scope.data[0].Data){
+            //    console.log(dat[1].title);
+            //}
             var j = 0;
 
-            for(var key in $scope.models.lists) {
-                var data = obj[j++].taskRef;
-                console.log(data)
-
-                for (var i = 0; i < data.length; i++) {
-                    $scope.models.lists[key].push({
-                        title: data[i].title,
-                        desc: data[i].desc
-                    })
-                }
-            }
+            //for(var key in $scope.models.lists) {
+            //    var data = obj[j++].taskRef;
+            //    console.log(data)
+            //
+            //    for (var i = 0; i < data.length; i++) {
+            //        $scope.models.lists[key].push({
+            //            title: data[i].title,
+            //            desc: data[i].desc
+            //        })
+            //    }
+            //}
         }
 
         $scope.colors = {
@@ -285,13 +304,13 @@ angular.module("task.controllers")
 
         $scope.Select = function (obj) {
 
-            console.log("select method call" +  obj);
+         //   console.log("select method call" +  obj);
             retreiveData.getTask(obj);
 
 
             $timeout(function () {
                 test = retreiveData.getData();
-                console.log(test);
+                //console.log(test);
                 getView(test)
             },3000);/*
              " ".go('task')
@@ -392,22 +411,22 @@ angular.module("task.controllers")
 
 
 
-        var vm = this;
-        vm.notificationsEnabled = true;
-        vm.toggleNotifications = function() {
-            vm.notificationsEnabled = !vm.notificationsEnabled;
-        };
-        vm.redial = function(e) {
-            $mdDialog.show(
-                $mdDialog.alert()
-                    .title('Suddenly, a redial')
-                    .content('You just called someone back. They told you the most amazing story that has ever been told. Have a cookie.')
-                    .ok('That was easy')
-            );
-        };
-        vm.checkVoicemail = function() {
-            // This never happens.
-        };
+        //var vm = this;
+        //vm.notificationsEnabled = true;
+        //vm.toggleNotifications = function() {
+        //    vm.notificationsEnabled = !vm.notificationsEnabled;
+        //};
+        //vm.redial = function(e) {
+        //    $mdDialog.show(
+        //        $mdDialog.alert()
+        //            .title('Suddenly, a redial')
+        //            .content('You just called someone back. They told you the most amazing story that has ever been told. Have a cookie.')
+        //            .ok('That was easy')
+        //    );
+        //};
+        //vm.checkVoicemail = function() {
+        //    // This never happens.
+        //};
 
 
 
@@ -479,96 +498,3 @@ angular.module("task.controllers")
          */
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//this.Select = function (obj) {
-//    console.log(obj);
-//    retreiveData.getTask(obj);
-//
-
-
-//this.recieve = function () {
-//
-//    /*
-//     retreiveData.numValue();
-//     */
-//    (function () {
-//
-//        this.check = retreiveData.getTask();
-//        console.log(this.check)
-//
-//        console.log(retreiveData.getItem);
-//        this.$apply();
-//    },2000)
-//
-//
-//}
-
-
-
-
-//}
-
-
-
-/*
- this.check = function () {
- (function () {
-
- // this.check = retreiveData.getTask();
- //console.log(this.check)
-
-
- this.$apply();
- },2000)
- };*/
-
-
-
-
-
-//function generateData(test){
-///*for (var i = 1; i <= 3; ++i) {
-//    console.log(test[i])
-//            this.models.lists.A.push({label: "Item B" + i});
-//            this.models.lists.B.push({label: "Item B" + i});
-//            this.models.lists.C.push({label: "Item C" + i});
-//            this.models.lists.D.push({label: "Item D" + i});
-//
-//}*/
-//
-//    " ".go('task')
-//
-//}
-
-// Generate initial model
-
-
-
-
-
-/*console.log("hello");
- var checkingElement = angular.element( document.querySelector('#hello'));
- checkingElement.addClass('hello');
-
-
-
-
- console.log(checkingElement);*/

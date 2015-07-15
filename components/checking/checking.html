@@ -48,7 +48,7 @@
             <div class="sideNav-add-position">
                 <section layout="row" layout-sm="column" layout-align="center center">
                     <md-button class="md-fab" ng-click="checking.addproject($event)">
-                        <ng-md-icon  icon="add" style="fill: white; margin: 19px auto !important;" size="20" ></ng-md-icon>
+                        <ng-md-icon  icon="add" style="fill: white;" size="20" ></ng-md-icon>
                     </md-button>
                 </section>
             </div>
@@ -56,26 +56,14 @@
     </div>
 </section>
 
-<!--<md-toolbar>-->
-    <!--<div class="md-toolbar-tools">-->
-        <!--<h2>-->
-            <!--<span>Task Assigner</span>-->
-        <!--</h2>-->
 
-        <!--<span flex></span>-->
-
-        <!--<md-button class="md-icon-button" aria-label="More" ng-click="checking.add($event)">-->
-            <!--<ng-md-icon icon="add" style="fill: white" size="20" ></ng-md-icon>-->
-        <!--</md-button>-->
-    <!--</div>-->
-<!--</md-toolbar>-->
 
 <md-toolbar style="background-color: white ;border-bottom: 1px solid #cccccc;">
 
         <div class="md-toolbar-tools" id="hello">
-        <md-select ng-change="checking.Select(createProject.$id)" ng-model="project" md-on-open="checking.loadUsers()" style="width: 200px; color: grey">
-            <md-select-label >{{ createProject ? createProject.$id : 'Project Name' }}</md-select-label>
-            <md-option ng-value="createProject" ng-repeat="project in checking.projects">{{project.$id}}</md-option>
+        <md-select ng-change="checking.Select(project.$id)" ng-model="project" md-on-open="checking.loadUsers()" style="width: 200px; color: grey">
+            <md-select-label >{{ project ? project.title : 'Project Name' }}</md-select-label>
+            <md-option ng-value="project" ng-repeat="project in checking.projects">{{project.title}}</md-option>
         </md-select>
 
         <div class="search-box-cont">
@@ -119,6 +107,7 @@
         </md-button>
 
         <ng-md-icon icon="menu" style="fill: grey" size="24" ng-click="checking.toggleRight()"></ng-md-icon>
+
     </div>
 </md-toolbar>
 
@@ -127,13 +116,13 @@
         <div layout="row" style=" background-color: #f2efef ;" flex id="mainCart">
 
             <md-list ng-repeat="(listName, list) in checking.models.lists"  class="list-style" >
-                    <md-card id="card-alignment" style="max-height: 595px;" ng-init=" Outerindex = $index ">
+                    <md-card id="card-alignment" ng-init=" Outerindex = $index ">
 
                     <!--<md-card-content style=" max-height: 607px;-->
                                               <!--overflow: auto;-->
                                               <!--padding: 0;">-->
 
-                        <md-toolbar  layout="row" class="md-primary md-hue-3 " >
+                        <md-toolbar  layout="row" class="{{checking.toolbarColor[$index]}}" >
                             <div>
                                 <h2 class="md-toolbar-tools" >
                                     <span> {{ listName }}</span> <span style="color: grey;"> 0</span>
@@ -163,7 +152,7 @@
                         </md-toolbar>
 
 
-                        <md-content style="background-color: #cccccc;">
+                        <md-content style="background-color: #cccccc;" id="input-toolbar">
                             <ul dnd-list="list" style="padding: 0 5px 0 5px !important; " id="hell">
                                 <md-card  class="md-3-line checking" ng-repeat="item in list" dnd-draggable="item"
                                          dnd-moved="list.splice($index, 1)"
@@ -187,13 +176,45 @@
                                 </md-card>
 
                             </ul>
+                            <md-toolbar style="background-color: #cccccc" >
+                                <!--
+                                                                <div layout="column" layout-align="center center" id="testing-input" ng-click="checking.inputClick()">
+                                -->
+                                <!-- <div style="width: 100%">
+                                     <input placeholder="Create new task...." class="input-box">
+                                 </div>
+
+                                 <div style="width: 100%" class="input-button-transition">
+
+                                     <input style="width: 100%">
+                                     <md-button class="md-raised md-primary" style="background-color: green">Create</md-button>
+                                     <md-button class="md-raised md-primary">Cancel</md-button>
+                                 </div>
+                             -->
+
+                                <input type="checkbox" name="toggle" id="toggle" />
+                                <label for="toggle" style="cursor: text;content:' '"></label>
+
+
+                                <div class="message">
+                                    <div layout="row" layout-align="center center">
+                                        <input type="text"  style="width: 95%;">
+                                    </div>
+
+
+                                    <md-button class="md-raised">Create</md-button>
+                                    <md-button>Cancel</md-button>
+
+                                </div>
+
+                            </md-toolbar>
 
                         </md-content>
 
 
 
 
-                        <md-toolbar style="background-color: #cccccc">
+                      <!--  <md-toolbar style="background-color: #cccccc">
                             <div layout="column" layout-align="center center" id="testing-input" ng-click="checking.inputClick(listName,$index,Outerindex)">
                                 <div style="width: 100%">
                                     <input placeholder="Create new task...." class="input-box" >
@@ -207,8 +228,11 @@
 
                                 </div>
                             </div>
-                        </md-toolbar>
+                        </md-toolbar>-->
+
+<!--
                     </md-card-content>
+-->
 
 
 

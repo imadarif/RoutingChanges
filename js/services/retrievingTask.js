@@ -19,6 +19,7 @@ angular.module('task.services')
                 var numOfNodes;
 
                 //changes required for other createProject.
+                path = "https://panacloudmodule.firebaseio.com/group-tasks/panacloud/panaswift"
                 path += '/' + grpName;
                 console.log(path);
 
@@ -59,16 +60,17 @@ angular.module('task.services')
                 var check= [];
                 var phaseDataRef ;
 
-                console.log("enter in taskinPhase " + obj);
-
+                console.log("enter in taskPhase " + obj);
+                console.log(obj)
                 for(var i in obj) {
                     check.push(path + '/' + obj[i] + '/')
                     phaseDataRef = new Firebase(check[i]);
-
+                    console.log(phaseDataRef)
                     ret.push({
                         taskRef : $firebaseArray(phaseDataRef)
                     });
                 }
+                console.log(ret)
 
             },
 
