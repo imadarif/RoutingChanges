@@ -69,6 +69,16 @@ angular.module('task.services')
                 ref.push({
                     title: task.taskInput
                 })
+            },
+
+            addnewList: function (projectId,listName){
+                var projectRef = groupTasksRef + '/' + 'panacloud' + '/' + 'panaswift' + '/' + projectId;
+                listRef = new Firebase(projectRef)
+
+                listRef.child('lists').set({
+                    listName : ""
+                })
+
             }
 
         }

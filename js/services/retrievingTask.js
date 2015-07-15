@@ -1,5 +1,5 @@
 angular.module('task.services')
-    .factory('retreiveData', function($timeout,$firebaseArray) {
+    .factory('retreiveData', function($timeout,$firebaseArray,$firebaseObject) {
         //var ref = new Firebase("https://panacloudmodule.firebaseio.com/group-tasks");
         var ref = new Firebase("https://panacloudmodule.firebaseio.com/group-tasks/" + 'panacloud' + '/' + 'panaswift');
         var grpPath;
@@ -61,15 +61,19 @@ angular.module('task.services')
                 var phaseDataRef ;
 
                 console.log("enter in taskPhase " + obj);
-                console.log(obj)
-                for(var i in obj) {
-                    check.push(path + '/' + obj[i] + '/')
-                    phaseDataRef = new Firebase(check[i]);
+               // console.log(obj)
+              //  console.log(path)
+                ret = $firebaseObject(new Firebase(path))
 
-                    ret.push({
-                        taskRef : $firebaseArray(phaseDataRef)
-                    });
-                }
+               // console.log($firebaseArray(new Firebase(path)))
+                //for(var i in obj) {
+                //    check.push(path + '/' + obj[i] + '/')
+                //    phaseDataRef = new Firebase(check[i]);
+                //    console.log(obj[i])
+                //    ret.push({
+                //        taskRef : $firebaseArray(phaseDataRef)
+                //    });
+                //}
               
 
             },

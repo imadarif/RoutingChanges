@@ -23,16 +23,14 @@ angular.module("task.controllers")
     //})
 
     .controller("CheckingController", function($mdDialog, $timeout, retreiveData, $mdSidenav, $mdUtil, $log,$q,addTask) {
-        var test = "";
+        var test = {};
 
 
         var $scope = this;
-        $scope.models = {
-            selected: null,
-            lists: {"To Do": [], "Doing": [],"Review": [], "Done": []}
-        };
 
-        $scope.addProjectList = function(ev){
+
+        $scope.addProjectList = function(projectid,ev){
+            console.log(projectid)
             $mdDialog.show({
                 controller: DialogController,
                 templateUrl: 'components/templates/createTask.html',
@@ -40,7 +38,7 @@ angular.module("task.controllers")
             }).then(function(Listname){
 /*
                 $scope.models.lists + '.' + Listname.toString() = []
-*/
+*/              addTask.addnewList(projectid,Listname)
 
                 $scope.models.lists[Listname] = [];
                 console.log("List name: " + Listname);
@@ -50,7 +48,10 @@ angular.module("task.controllers")
             });
         }
 
-
+        $scope.models = {
+            selected: null,
+            lists: ""
+        };
         //$scope.toolbarColor = ["md-primary","md-warn","md-raised","md-accent"];
 
         $scope.toolbarColor = ["pink","blue","green","red"];
@@ -79,8 +80,11 @@ angular.module("task.controllers")
 
         var getView = function (obj) {
             console.log("in getview method ")
-            console.log(obj)
+            console.log(obj.lists)
 
+            $scope.models.lists = obj.lists
+
+            console.log($scope.models)
 
             var j = 0;
 
