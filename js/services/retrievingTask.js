@@ -57,8 +57,8 @@ angular.module('task.services')
             },
 
             taskInPhase: function(obj) {
-                var check= [];
-                var phaseDataRef ;
+               // var check= [];
+             //   var phaseDataRef ;
 
                 console.log("enter in taskPhase " + obj);
                // console.log(obj)

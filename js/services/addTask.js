@@ -1,6 +1,6 @@
 angular.module('task.services')
 
-    .factory('addTask', function($firebaseArray) {
+    .factory('addTask', function($firebaseArray,$timeout) {
         var groupTasksRef = "https://panacloudmodule.firebaseio.com/group-tasks";
 
         var path = "";
@@ -49,11 +49,11 @@ angular.module('task.services')
                 projectId.set({
                     title: projectName,
                     desc: "",
-                   lists: {
-                            "To Do": "",
-                            "Doing": "",
-                            "Review": "",
-                            "Done": ""
+                    lists: {
+                            "To Do": "To Do",
+                            "Doing": "Doing",
+                            "Review": "Review",
+                            "Done": "Done"
                         }
                 })
 
@@ -72,13 +72,51 @@ angular.module('task.services')
             },
 
             addnewList: function (projectId,listName){
-                var projectRef = groupTasksRef + '/' + 'panacloud' + '/' + 'panaswift' + '/' + projectId;
+                var projectRef = groupTasksRef + '/' + 'panacloud' + '/' + 'panaswift' + '/' + projectId + '/' +'lists';
                 listRef = new Firebase(projectRef)
+                var value = listName
 
-                listRef.child('lists').set({
-                    listName : ""
-                })
+                //ref = $firebaseArray(listRef)
+                listRef.child(value).set(1)
+            },
 
+            deleteList: function (projectId, listname) {
+                var projectRef = groupTasksRef + '/' + 'panacloud' + '/' + 'panaswift' + '/' + projectId + '/' +'lists';
+                var value = listname;
+
+                listRef.child(value).set(0)
+            },
+
+            deleteOldRef: function(ref) {
+                ref.remove()
+            },
+            renameList : function(index,oldName,newName,projectId){
+               console.log('rename list')
+                var projectRef = groupTasksRef + '/' + 'panacloud' + '/' + 'panaswift' + '/' + projectId + '/' +'lists';
+                var that = this;
+
+                ref = new Firebase(projectRef);
+
+                console.log(ref)
+
+                ref.on('value', function(dataSnapshot) {
+                    // code to handle new value.
+
+                    $timeout(function() {
+                        console.log(dataSnapshot.val())
+                        ref.set(newName).set(1);
+/*
+                        that.deleteOldRef(ref)
+*/
+                    },3000)
+
+                });
+
+              /*  for(key in change) {
+                    if( change.hasOwnProperty(key) ) {
+                        ref.child(key).update( change[key] );
+                    }
+                }  */
             }
 
         }

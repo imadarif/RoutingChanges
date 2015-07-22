@@ -40,9 +40,28 @@ angular.module("task.controllers")
                 $scope.models.lists + '.' + Listname.toString() = []
 */              addTask.addnewList(projectid,Listname)
 
-                $scope.models.lists[Listname] = [];
+                //$scope.models.lists[Listname] = [];
                 console.log("List name: " + Listname);
              //   addTask.createProject(projectName);
+            },function(){
+                console.log("reject");
+            });
+        }
+
+        $scope.deleteProjectList = function(project,ev) {
+            $mdDialog.show({
+                controller: DialogController,
+                templateUrl: 'components/templates/createTask.html',
+                targetEvent: ev
+            }).then(function(Listname){
+                /*
+                 $scope.models.lists + '.' + Listname.toString() = []
+                 */
+                addTask.deleteList(projectid,Listname)
+
+                //$scope.models.lists[Listname] = [];
+                console.log("List name: " + Listname);
+                //  addTask.createProject(projectName);
             },function(){
                 console.log("reject");
             });
@@ -56,15 +75,20 @@ angular.module("task.controllers")
 
         $scope.toolbarColor = ["pink","blue","green","red"];
 
-        $scope.rename = function(ev,index){
+        $scope.rename = function(ev,index,listName,projectId){
+            console.log(projectId)
             $mdDialog.show({
                 controller: renameDialogController,
                 templateUrl: 'components/templates/renameDailog.html',
                 targetEvent: ev
             }).then(function(newListname){
+
                 //$scope.models.lists[Listname] = [];
                 //$scope.models.lists[index]
-                console.log($scope.models.lists)
+
+                console.log(index,listName,newListname)
+                addTask.renameList(index,listName,newListname,projectId)
+                //console.log($scope.models.lists)
                // console.log("List name: " + newListname);
                 //   addTask.createProject(projectName);
             },function(){
@@ -73,13 +97,14 @@ angular.module("task.controllers")
         }
 
         $scope.delete = function(index){
-
+            console.log(index)
         }
 
         $scope.data = []
 
         var getView = function (obj) {
             console.log("in getview method ")
+            console.log(obj)
             console.log(obj.lists)
 
             $scope.models.lists = obj.lists
@@ -434,7 +459,7 @@ angular.module("task.controllers")
             console.log("cancel");
         };
 
-        $scope.save = function (Listname) {
+        $scope.save = function () {
             //addTask.taskInfo($scope.initializeGroup);
             console.log($scope.initialize.list);
             $mdDialog.hide($scope.initialize.list);
@@ -461,7 +486,7 @@ angular.module("task.controllers")
     }
 }
 
-    function renameDialogController($scope,$mdDialog, addTask) {
+    function renameDialogController($scope,$mdDialog) {
 
     $scope.list = {};
 
@@ -470,12 +495,8 @@ angular.module("task.controllers")
         console.log("cancel");
     };
 
-    $scope.save = function (index) {
-        //addTask.taskInfo($scope.initializeGroup);
-        console.log($scope.list.name);
+    $scope.save = function () {
         $mdDialog.hide($scope.list.name);
-        /*
-         " ".go("form");
-         */
+
     }
 }
