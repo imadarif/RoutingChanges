@@ -1,0 +1,33 @@
+<md-dialog aria-label="">
+    <md-content >
+        <div layout="column">
+            <div>
+
+            </div>
+            <!--<md-select placeholder="Pick" ng-model="someVal">-->
+                <!--<md-option value="1">One</md-option>-->
+                <!--<md-option value="2">Two</md-option>-->
+            <!--</md-select>-->
+            <md-input-container>
+                        <label>List Name</label>
+                        <input ng-model="initialize.list">
+                    </md-input-container>
+            <!--<div>-->
+                <!--<md-radio-group layout="row" ng-model="initializeGroup.data">-->
+                    <!--<md-radio-button  value="open" class="md-primary" >Open Task</md-radio-button>-->
+                    <!--<md-radio-button  value="close" class="md-primary">Close Task</md-radio-button>-->
+                    <!--<md-radio-button  value="progress" class="md-primary">In Progress</md-radio-button>-->
+                    <!--<md-radio-button  value="review" class="md-primary">In Review</md-radio-button>-->
+                <!--</md-radio-group>-->
+            <!--</div>-->
+            <div class="md-actions" layout="row">
+                <md-button class="md-warn" ng-click="cancel()">
+                    Cancel
+                </md-button>
+                <md-button class="md-primary" ng-click="save()">
+                    Proceed
+                </md-button>
+            </div>
+        </div>
+    </md-content>
+</md-dialog>
