@@ -8,10 +8,7 @@
                 <!--<md-option value="1">One</md-option>-->
                 <!--<md-option value="2">Two</md-option>-->
             <!--</md-select>-->
-            <md-input-container>
-                        <label>List Name</label>
-                        <input ng-model="initialize.list">
-                    </md-input-container>
+           <label>  Do you want to delete ?</label>
             <!--<div>-->
                 <!--<md-radio-group layout="row" ng-model="initializeGroup.data">-->
                     <!--<md-radio-button  value="open" class="md-primary" >Open Task</md-radio-button>-->
@@ -21,11 +18,11 @@
                 <!--</md-radio-group>-->
             <!--</div>-->
             <div class="md-actions" layout="row">
-                <md-button class="md-warn" ng-click="cancel()">
-                    Cancel
+                <md-button class="md-raised" ng-click="cancel()">
+                    No
                 </md-button>
-                <md-button class="md-primary" ng-click="save()">
-                    Proceed
+                <md-button class="md-raised md-warn" ng-click="save()">
+                    Yes
                 </md-button>
             </div>
         </div>

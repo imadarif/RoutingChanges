@@ -1,85 +1,95 @@
 angular.module('task.services')
     .factory('retreiveData', function($timeout,$firebaseArray,$firebaseObject) {
-        //var ref = new Firebase("https://panacloudmodule.firebaseio.com/group-tasks");
+
         var ref = new Firebase("https://panacloudmodule.firebaseio.com/group-tasks/" + 'panacloud' + '/' + 'panaswift');
+        var groupTasksRef = "https://panacloudmodule.firebaseio.com/group-tasks";
         var grpPath;
 
         var path = "https://panacloudmodule.firebaseio.com/group-tasks"
-        var ret = [];
+        var ret = {};
 
         return {
             getSubGroupTask: function() {
-                var keyObj = $firebaseArray(ref);
+                var projectRef = groupTasksRef + '/' + 'panacloud' + '/' + 'panaswift';
+                ref = new Firebase(projectRef);
+                var project = $firebaseArray(ref);
 
-                return keyObj
+                return project
             },
 
-            getTask: function(grpName) {
-                var that = this;
-                var numOfNodes;
-
-                //changes required for other createProject.
-                path = "https://panacloudmodule.firebaseio.com/group-tasks/panacloud/panaswift"
-                path += '/' + grpName;
-                console.log(path);
-
-                grpPath = new Firebase(path)
-                console.log(grpPath);
-
-                grpPath.once('value',function(datasnapshot){
-                    numOfNodes = datasnapshot.numChildren();
-                    console.log("once method" + numOfNodes);
-                });
-
-                setTimeout(function() {
-                    that.numValue(numOfNodes);
-                },2000);
-
+            getTask:function(projectId){
+                var projectRef = groupTasksRef + '/' + 'panacloud' + '/' + 'panaswift' + '/' + projectId;
+                ref = new Firebase(projectRef);
+                ret = $firebaseObject(ref)
             },
 
-            numValue: function (numofNodes) {
-                var that = this;
-                var phase = [];
+            //getTask: function(projectId) {
+            //
+            //    var that = this;
+            //    var numOfNodes;
+            //
+            //    //changes required for other createProject.
+            //    path = "https://panacloudmodule.firebaseio.com/group-tasks/panacloud/panaswift"
+            //    path += '/' + projectId;
+            ////    console.log(path);
+            //
+            //    grpPath = new Firebase(path)
+            //   // console.log(grpPath);
+            //
+            //    grpPath.once('value',function(datasnapshot){
+            //        numOfNodes = datasnapshot.numChildren();
+            ////        console.log("once method" + numOfNodes);
+            //    });
+            //
+            //    setTimeout(function() {
+            //        that.numValue(numOfNodes);
+            //    },2000);
+            //
+            //},
 
-                console.log('numValue function ' + path);
-                var dataArray = $firebaseArray(grpPath);
-                console.log(numofNodes);
-                dataArray.$loaded(function (data) {
-                    for(var i = 0; i < numofNodes; i++) {
-                        phase.push(data[i].$id);
-                    }
-
-                    that.taskInPhase(phase);
-
-                }, function(error){
-                        console.log(error)
-                });
-            },
-
-            taskInPhase: function(obj) {
-               // var check= [];
-             //   var phaseDataRef ;
-
-                console.log("enter in taskPhase " + obj);
-               // console.log(obj)
-              //  console.log(path)
-                ret = $firebaseObject(new Firebase(path))
-
-               // console.log($firebaseArray(new Firebase(path)))
-                //for(var i in obj) {
-                //    check.push(path + '/' + obj[i] + '/')
-                //    phaseDataRef = new Firebase(check[i]);
-                //    console.log(obj[i])
-                //    ret.push({
-                //        taskRef : $firebaseArray(phaseDataRef)
-                //    });
-                //}
-              
-
-            },
+           // numValue: function (numofNodes) {
+           //     var that = this;
+           //     var phase = [];
+           //
+           ////     console.log('numValue function ' + path);
+           //     var dataArray = $firebaseArray(grpPath);
+           // //    console.log(numofNodes);
+           //     dataArray.$loaded(function (data) {
+           //         for(var i = 0; i < numofNodes; i++) {
+           //             phase.push(data[i].$id);
+           //         }
+           //
+           //         that.taskInPhase(phase);
+           //
+           //     }, function(error){
+           //    //         console.log(error)
+           //     });
+           // },
+           //
+           // taskInPhase: function(obj) {
+           //    // var check= [];
+           //  //   var phaseDataRef ;
+           //
+           //   //  console.log("enter in taskPhase " + obj);
+           //    // console.log(obj)
+           //   //  console.log(path)
+           //     ret = $firebaseObject(new Firebase(path))
+           // //    console.log(ret)
+           //    // console.log($firebaseArray(new Firebase(path)))
+           //     //for(var i in obj) {
+           //     //    check.push(path + '/' + obj[i] + '/')
+           //     //    phaseDataRef = new Firebase(check[i]);
+           //     //    console.log(obj[i])
+           //     //    ret.push({
+           //     //        taskRef : $firebaseArray(phaseDataRef)
+           //     //    });
+           //     //}
+           //
+           //
+           // },
 
             getData: function(){
-                return ret;
+                return ret
             }
         }
 

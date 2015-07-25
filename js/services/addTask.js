@@ -50,13 +50,28 @@ angular.module('task.services')
                     title: projectName,
                     desc: "",
                     lists: {
-                            "To Do": "To Do",
-                            "Doing": "Doing",
-                            "Review": "Review",
-                            "Done": "Done"
+                            todo: {
+                                name: "To Do",
+                                task: "",
+                                color: "pink"
+                            },
+                            doing: {
+                                name: "Doing",
+                                task: "",
+                                color: "blue"
+                            },
+                            review: {
+                                name: "Review",
+                                task: "",
+                                color: "green"
+                            },
+                            done: {
+                                name: "Done",
+                                task: "",
+                                color: "red"
+                            }
                         }
                 })
-
                 console.log(projectId)
             },
 
@@ -74,51 +89,61 @@ angular.module('task.services')
             addnewList: function (projectId,listName){
                 var projectRef = groupTasksRef + '/' + 'panacloud' + '/' + 'panaswift' + '/' + projectId + '/' +'lists';
                 listRef = new Firebase(projectRef)
-                var value = listName
+                var value = listName.toLowerCase()
+                console.log(value)
 
-                //ref = $firebaseArray(listRef)
-                listRef.child(value).set(1)
+                listRef.child(value).set({
+                  name : listName,
+                  task : "",
+                  color: "blue"
+                })
             },
 
             deleteList: function (projectId, listname) {
-                var projectRef = groupTasksRef + '/' + 'panacloud' + '/' + 'panaswift' + '/' + projectId + '/' +'lists';
-                var value = listname;
-
-                listRef.child(value).set(0)
+                var projectRef = groupTasksRef + '/' + 'panacloud' + '/' + 'panaswift' + '/' + projectId + '/' +'lists'+ '/' +listname;
+                listRef = new Firebase(projectRef);
+                var onComplete = function(error) {
+                    if (error) {
+                        console.log('Synchronization failed');
+                    } else {
+                        console.log('Synchronization succeeded');
+                    }
+                };
+                listRef.remove(onComplete);
             },
 
-            deleteOldRef: function(ref) {
-                ref.remove()
-            },
-            renameList : function(index,oldName,newName,projectId){
-               console.log('rename list')
-                var projectRef = groupTasksRef + '/' + 'panacloud' + '/' + 'panaswift' + '/' + projectId + '/' +'lists';
+            renameList : function(index,listName,newName,projectId){
+             //  console.log('rename list')
+                var projectRef = groupTasksRef + '/' + 'panacloud' + '/' + 'panaswift' + '/' + projectId + '/' +'lists' + '/' + listName + '/' + 'name';
                 var that = this;
 
-                ref = new Firebase(projectRef);
+                listRef = new Firebase(projectRef);
 
-                console.log(ref)
+              //  console.log(ref)
 
-                ref.on('value', function(dataSnapshot) {
+                listRef.on('value', function(dataSnapshot) {
                     // code to handle new value.
 
                     $timeout(function() {
-                        console.log(dataSnapshot.val())
-                        ref.set(newName).set(1);
+                    //    console.log(dataSnapshot.val())
+                        listRef.set(newName)
 /*
                         that.deleteOldRef(ref)
 */
                     },3000)
 
                 });
+            },
 
-              /*  for(key in change) {
-                    if( change.hasOwnProperty(key) ) {
-                        ref.child(key).update( change[key] );
-                    }
-                }  */
+            toolbarColor: function(projectId,color,listName){
+             //   console.log('rename list')
+                var projectRef = groupTasksRef + '/' + 'panacloud' + '/' + 'panaswift' + '/' + projectId + '/' +'lists' + '/' + listName + '/' + 'color';
+                var that = this;
+
+                listRef = new Firebase(projectRef);
+                listRef.set(color)
+              //  console.log(listRef)
             }
-
         }
     });
 

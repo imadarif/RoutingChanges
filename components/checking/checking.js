@@ -1,4 +1,3 @@
-'use strict'
 angular.module("task.controllers")
 
 
@@ -48,19 +47,20 @@ angular.module("task.controllers")
             });
         }
 
-        $scope.deleteProjectList = function(project,ev) {
+        $scope.deleteProjectList = function(ev,projectId,listName) {
+            console.log(listName)
             $mdDialog.show({
-                controller: DialogController,
-                templateUrl: 'components/templates/createTask.html',
+                controller: deleteDialogController,
+                templateUrl: 'components/templates/deleteListDailog.html',
                 targetEvent: ev
-            }).then(function(Listname){
+            }).then(function(){
                 /*
                  $scope.models.lists + '.' + Listname.toString() = []
                  */
-                addTask.deleteList(projectid,Listname)
+                addTask.deleteList(projectId,listName)
 
                 //$scope.models.lists[Listname] = [];
-                console.log("List name: " + Listname);
+                console.log("List name: " + listName);
                 //  addTask.createProject(projectName);
             },function(){
                 console.log("reject");
@@ -76,7 +76,7 @@ angular.module("task.controllers")
         $scope.toolbarColor = ["pink","blue","green","red"];
 
         $scope.rename = function(ev,index,listName,projectId){
-            console.log(projectId)
+            console.log(projectId,index,listName)
             $mdDialog.show({
                 controller: renameDialogController,
                 templateUrl: 'components/templates/renameDailog.html',
@@ -96,35 +96,33 @@ angular.module("task.controllers")
             });
         }
 
-        $scope.delete = function(index){
-            console.log(index)
-        }
+
 
         $scope.data = []
 
-        var getView = function (obj) {
-            console.log("in getview method ")
-            console.log(obj)
-            console.log(obj.lists)
-
-            $scope.models.lists = obj.lists
-
-            console.log($scope.models)
-
-            var j = 0;
-
-            //for(var key in $scope.models.lists) {
-            //    var data = obj[j++].taskRef;
-            //    console.log(data)
-            //
-            //    for (var i = 0; i < data.length; i++) {
-            //        $scope.models.lists[key].push({
-            //            title: data[i].title,
-            //            desc: data[i].desc
-            //        })
-            //    }
-            //}
-        }
+        //var getView = function (obj) {
+        //    console.log("in getview method ")
+        //    //console.log(obj)
+        //    console.log(obj.lists)
+        //
+        //    $scope.models.lists = obj.lists
+        //
+        //    console.log($scope.models)
+        //
+        //    var j = 0;
+        //
+        //    //for(var key in $scope.models.lists) {
+        //    //    var data = obj[j++].taskRef;
+        //    //    console.log(data)
+        //    //
+        //    //    for (var i = 0; i < data.length; i++) {
+        //    //        $scope.models.lists[key].push({
+        //    //            title: data[i].title,
+        //    //            desc: data[i].desc
+        //    //        })
+        //    //    }
+        //    //}
+        //}
 
         $scope.colors = {
                         x : 10,
@@ -134,28 +132,30 @@ angular.module("task.controllers")
         }
 
 
-        $scope.selectedColor = function(color,index,ind){
+        $scope.selectedColor = function(projectId,color,index,ind,listName){
+
             console.log("selected color is : " + color + " index is : " + index + "list index " + ind);
 
+            addTask.toolbarColor(projectId,color,listName)
 
-            var mainCartElement = angular.element( document.querySelector('#mainCart'));
-            console.log(mainCartElement);
-
-            var md_list_element = mainCartElement.children(1);
-            console.log(md_list_element);
-            console.log(md_list_element[ind]);
-
-            var md_card_element = md_list_element[ind].children;
-            console.log(md_card_element);
-
-
-            var md_toolbar_element = md_card_element[0].children;
-            console.log(md_toolbar_element);
-
-            var md_toolbar_change = md_toolbar_element[0];
-            console.log(md_toolbar_change);
-
-            md_toolbar_change.style.backgroundColor = color;
+            //var mainCartElement = angular.element( document.querySelector('#mainCart'));
+            //console.log(mainCartElement);
+            //
+            //var md_list_element = mainCartElement.children(1);
+            //console.log(md_list_element);
+            //console.log(md_list_element[ind]);
+            //
+            //var md_card_element = md_list_element[ind].children;
+            //console.log(md_card_element);
+            //
+            //
+            //var md_toolbar_element = md_card_element[0].children;
+            //console.log(md_toolbar_element);
+            //
+            //var md_toolbar_change = md_toolbar_element[0];
+            //console.log(md_toolbar_change);
+            //
+            //md_toolbar_change.style.backgroundColor = color;
 
 
         }
@@ -220,29 +220,28 @@ angular.module("task.controllers")
 
 
 
-            /*
-            var md_toolbar_change = md_toolbar_element[2];
-            console.log(md_toolbar_change);*/
 
-            /*var md_main_cont = md_toolbar_change.children;
-
-            console.log(md_main_cont)
-*/
-            /*
-
-            md_input[0].style.display = 'none';
-            md_input[1].className= 'input-with-transition';
-
-           //    console.log(typeof($scope.task.taskInput))
-
-            $timeout(function () {
-
-                if ($scope.task.taskInput === undefined) {
-                    md_input[0].style.display = 'block';
-                    md_input[1].className = 'input-button-transition';
-                }
-
-            },5000)*/
+            //var md_toolbar_change = md_toolbar_element[2];
+            //console.log(md_toolbar_change);
+            //
+            //var md_main_cont = md_toolbar_change.children;
+            //
+            //console.log(md_main_cont)
+            //
+            //
+            //md_input[0].style.display = 'none';
+            //md_input[1].className= 'input-with-transition';
+            //
+            //  console.log(typeof($scope.task.taskInput))
+            //
+            //$timeout(function () {
+            //
+            //    if ($scope.task.taskInput === undefined) {
+            //        md_input[0].style.display = 'block';
+            //        md_input[1].className = 'input-button-transition';
+            //    }
+            //
+            //},5000)
 
 
 
@@ -289,21 +288,21 @@ angular.module("task.controllers")
         ]
 
 
-        $scope.add = function(ev){
-            $mdDialog.show({
-                controller: DialogController,
-                templateUrl: 'components/templates/createTask.html',
-                targetEvent: ev
-            })
-        }
+        //$scope.add = function(ev){
+        //    $mdDialog.show({
+        //        controller: DialogController,
+        //        templateUrl: 'components/templates/createTask.html',
+        //        targetEvent: ev
+        //    })
+        //}
 
-        $scope.recieveTask = function() {
-            $scope.checkData = retreiveData.taskInPhase();
-
-            setTimeout(function () {
-                console.log($scope.checkData);
-            },2000);
-        }
+        //$scope.recieveTask = function() {
+        //    $scope.checkData = retreiveData.taskInPhase();
+        //
+        //    setTimeout(function () {
+        //        console.log($scope.checkData);
+        //    },2000);
+        //}
 
 
         $scope.toggleRight = buildToggler('right');
@@ -331,19 +330,26 @@ angular.module("task.controllers")
 
         }
 
-        $scope.Select = function (obj) {
-
-         //   console.log("select method call" +  obj);
-            retreiveData.getTask(obj);
+        $scope.Select = function (projectId) {
 
 
-            $timeout(function () {
-                test = retreiveData.getData();
-                //console.log(test);
-                getView(test)
-            },3000);/*
-             " ".go('task')
-             */
+       //     retreiveData.getTask(projectId);
+
+            retreiveData.getTask(projectId);
+
+            return $timeout(function() {
+                var data  = retreiveData.getData();
+                $scope.models.lists = data.lists
+                console.log(data)
+            }, 550);
+
+        //    $timeout(function () {
+       //         test = retreiveData.getData();
+       //         //console.log(test);
+        //        getView(test)
+       //     },3000);/*
+         //    " ".go('task')
+       //      */
         }
 
         var self = this;
@@ -498,5 +504,19 @@ angular.module("task.controllers")
     $scope.save = function () {
         $mdDialog.hide($scope.list.name);
 
+    }
+}
+
+    function deleteDialogController($scope,$mdDialog) {
+
+
+
+    $scope.cancel = function () {
+        $mdDialog.cancel();
+        console.log("cancel");
+    };
+
+    $scope.save = function () {
+        $mdDialog.hide();
     }
 }

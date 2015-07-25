@@ -1,5 +1,7 @@
 angular.module('task', ['ngNewRouter', 'task.controllers', 'task.services', 'dndLists', 'firebase', 'ngMaterial', 'ngMdIcons'])
 
+
+
     .config(['$mdThemingProvider', function($mdThemingProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('indigo')

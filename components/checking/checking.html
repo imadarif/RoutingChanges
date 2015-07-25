@@ -113,7 +113,7 @@
 
 
 
-        <div layout="row" style=" background-color: #f2efef ;" flex id="mainCart">
+        <div layout="row" style=" background-color: #f2efef ;" flex id="mainCart" >
 
             <md-list ng-repeat="(listName, list) in checking.models.lists"  class="list-style" >
                     <md-card id="card-alignment" ng-init=" Outerindex = $index ">
@@ -122,10 +122,10 @@
                                               <!--overflow: auto;-->
                                               <!--padding: 0;">-->
 
-                        <md-toolbar  layout="row" class="{{checking.toolbarColor[$index]}}" >
+                        <md-toolbar  layout="row" class="{{list.color}}" >
                             <div>
                                 <h2 class="md-toolbar-tools" >
-                                    <span> {{ listName }}</span> <span style="color: grey;"> 0</span>
+                                    <span> {{ list.name }}</span> <span style="color: grey;"> 0</span>
                                 </h2>
                             </div>
 
@@ -134,11 +134,11 @@
                                 <md-select class="md-toolbar-tools custom-md-select" ng-model="">
 
                                     <md-option ng-click="checking.rename($event,Outerindex,listName,project.$id)" >Rename Column</md-option>
-                                    <md-option ng-click="checking.delete(Outerindex)">Delete Column</md-option>
+                                    <md-option ng-click="checking.deleteProjectList($event,project.$id,listName)">Delete Column</md-option>
 
                                     <div style="border-top: 1px solid #cccccc; padding: 10px;padding-bottom: 0;">
                                         <svg ng-repeat="color in checking.colors.colour" class="circle1">
-                                                <circle  ng-click="checking.selectedColor(color,$index,Outerindex)"
+                                                <circle  ng-click="checking.selectedColor(project.$id,color,$index,Outerindex,listName)"
                                                                 ng-attr-cx={{checking.colors.x}}
                                                                 ng-attr-cy={{checking.colors.y}}
                                                                 ng-attr-r={{checking.colors.r}}
@@ -154,7 +154,7 @@
 
                         <md-content style="background-color: #cccccc;" id="input-toolbar">
                             <ul dnd-list="list" style="padding: 0 5px 0 5px !important; " id="hell">
-                                <md-card  class="md-3-line checking" ng-repeat="item in list" dnd-draggable="item"
+                                <md-card  class="md-3-line checking" ng-repeat="item in list.task" dnd-draggable="item"
                                          dnd-moved="list.splice($index, 1)"
                                          dnd-effect-allowed="move"
                                          dnd-selected="models.selected = item"
@@ -177,6 +177,7 @@
 
                             </ul>
                             <md-toolbar style="background-color: #cccccc" >
+
                                 <!--
                                                                 <div layout="column" layout-align="center center" id="testing-input" ng-click="checking.inputClick()">
                                 -->
