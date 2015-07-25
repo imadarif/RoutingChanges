@@ -11,4 +11,6 @@ last updated wednesday (15 july 2015)
 last update (22 july 2015)
 1.delete list working
 2.rename list
-3.project add 
+3.project add
+
+last testing

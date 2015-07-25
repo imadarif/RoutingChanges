@@ -75,14 +75,18 @@ angular.module('task.services')
                 console.log(projectId)
             },
 
-            createTask: function(listName,task) {
+            createTask: function(projectId,listName,listTask) {
 
-                path = projectId.toString();
+                var projectRef = groupTasksRef + '/' + 'panacloud' + '/' + 'panaswift' + '/' + projectId + '/' +'lists'+'/' +listName + '/' + 'task';
 
-                ref = new Firebase(path  + '/' +listName);
 
+                ref = new Firebase(projectRef);
+
+
+               console.log(listTask)
                 ref.push({
-                    title: task.taskInput
+                    task : listTask.task,
+                    attachment : 0,
                 })
             },
 
@@ -100,7 +104,7 @@ angular.module('task.services')
             },
 
             deleteList: function (projectId, listname) {
-                var projectRef = groupTasksRef + '/' + 'panacloud' + '/' + 'panaswift' + '/' + projectId + '/' +'lists'+ '/' +listname;
+                var projectRef = groupTasksRef + '/' + 'panacloud' + '/' + 'panaswift' + '/' + projectId + '/' +'lists'+ '/' +listname ;
                 listRef = new Firebase(projectRef);
                 var onComplete = function(error) {
                     if (error) {

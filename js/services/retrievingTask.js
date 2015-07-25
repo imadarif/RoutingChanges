@@ -3,9 +3,8 @@ angular.module('task.services')
 
         var ref = new Firebase("https://panacloudmodule.firebaseio.com/group-tasks/" + 'panacloud' + '/' + 'panaswift');
         var groupTasksRef = "https://panacloudmodule.firebaseio.com/group-tasks";
-        var grpPath;
 
-        var path = "https://panacloudmodule.firebaseio.com/group-tasks"
+
         var ret = {};
 
         return {

@@ -160,11 +160,11 @@ angular.module("task.controllers")
 
         }
 
-        $scope.task = {}
+        $scope.listTask = {}
 
-        $scope.newTask = function(listName){
-            console.log(listName)
-            addTask.createTask(listName,$scope.task)
+        $scope.newTask = function(projectId,listName){
+            console.log($scope.listTask.task)
+            addTask.createTask(projectId,listName,$scope.listTask)
         }
 
         $scope.cancelTask = function(ind){
@@ -192,17 +192,21 @@ angular.module("task.controllers")
             var md_input = md_main_cont[0].children;
            // console.log(md_input)
 
-            md_input[0].style.display = "block";
+            md_input[0].style.display = 'block';
             md_input[1].className = "input-button-transition"
+
+            console.log(md_input)
         }
 
-        $scope.inputClick = function(ind){
+        $scope.inputClick = function(listName,index,ind){
 
             console.log(ind)
             var mainCartElement = angular.element( document.querySelector('#mainCart'));
             console.log(mainCartElement);
 
             var md_list_element = mainCartElement.children(1);
+
+            console.log(md_list_element)
 
             var md_card_element = md_list_element[ind].children;
             console.log(md_card_element);
@@ -211,37 +215,39 @@ angular.module("task.controllers")
             console.log(md_toolbar_element);
 
 
-            var md_content_data = md_toolbar_element[1].children;
-            console.log(md_content_data);
-
-            var md_toolbar_input = md_content_data[1].children;
-            console.log(md_toolbar_input);
-
-
+            //var md_content_data = md_toolbar_element[1].children;
+            //console.log(md_content_data);
+            //
+            //var md_toolbar_input = md_content_data[1].children;
+            //console.log(md_toolbar_input);
 
 
 
-            //var md_toolbar_change = md_toolbar_element[2];
-            //console.log(md_toolbar_change);
-            //
-            //var md_main_cont = md_toolbar_change.children;
-            //
-            //console.log(md_main_cont)
-            //
-            //
-            //md_input[0].style.display = 'none';
-            //md_input[1].className= 'input-with-transition';
-            //
-            //  console.log(typeof($scope.task.taskInput))
-            //
-            //$timeout(function () {
-            //
-            //    if ($scope.task.taskInput === undefined) {
-            //        md_input[0].style.display = 'block';
-            //        md_input[1].className = 'input-button-transition';
-            //    }
-            //
-            //},5000)
+
+
+            var md_toolbar_change = md_toolbar_element[2];
+            console.log(md_toolbar_change);
+
+            var md_main_cont = md_toolbar_change.children;
+
+            console.log(md_main_cont)
+
+            var md_input = md_main_cont[0].children
+
+
+            md_input[0].style.display = 'none';
+            md_input[1].className= 'input-with-transition';
+
+              console.log(typeof($scope.listTask.task))
+
+            $timeout(function () {
+
+                if ($scope.listTask.task === undefined) {
+                    md_input[0].style.display = 'block';
+                    md_input[1].className = 'input-button-transition';
+                }
+
+            },5000)
 
 
 
