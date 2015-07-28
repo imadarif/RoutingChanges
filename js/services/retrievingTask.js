@@ -19,7 +19,7 @@ angular.module('task.services')
             getTask:function(projectId){
                 var projectRef = groupTasksRef + '/' + 'panacloud' + '/' + 'panaswift' + '/' + projectId;
                 ref = new Firebase(projectRef);
-                ret = $firebaseObject(ref)
+                ret = $firebaseArray(ref)
             },
 
             //getTask: function(projectId) {

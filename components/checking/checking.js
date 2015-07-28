@@ -67,10 +67,7 @@ angular.module("task.controllers")
             });
         }
 
-        $scope.models = {
-            selected: null,
-            lists: ""
-        };
+
         //$scope.toolbarColor = ["md-primary","md-warn","md-raised","md-accent"];
 
         $scope.toolbarColor = ["pink","blue","green","red"];
@@ -343,9 +340,14 @@ angular.module("task.controllers")
 
             retreiveData.getTask(projectId);
 
+            $scope.models = {
+                selected: null,
+                lists: []
+            };
+
             return $timeout(function() {
                 var data  = retreiveData.getData();
-                $scope.models.lists = data.lists
+                $scope.models.lists = data[1]
                 console.log(data)
             }, 550);
 

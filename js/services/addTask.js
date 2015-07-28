@@ -81,6 +81,10 @@ angular.module('task.services')
 
 
                 ref = new Firebase(projectRef);
+                //var list = []
+                //ref.on('value', function(snap) { list = snap.val();
+                //console.log(list)
+                //});
 
 
                console.log(listTask)

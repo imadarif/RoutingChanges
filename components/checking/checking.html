@@ -153,7 +153,7 @@
 
 
                         <md-content style="background-color: #cccccc;" id="input-toolbar">
-                            <ul dnd-list="list" style="padding: 0 5px 0 5px !important; " id="hell">
+                            <ul dnd-list="list.task" style="padding: 0 5px 0 5px !important; " id="hell">
                                 <md-card  class="md-3-line checking" ng-repeat="item in list.task" dnd-draggable="item"
                                          dnd-moved="list.splice($index, 1)"
                                          dnd-effect-allowed="move"
