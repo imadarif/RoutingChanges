@@ -6,7 +6,7 @@ angular.module('task.services')
 
 
         var ret = {};
-
+        var test = []
         return {
             getSubGroupTask: function() {
                 var projectRef = groupTasksRef + '/' + 'panacloud' + '/' + 'panaswift';
@@ -19,7 +19,23 @@ angular.module('task.services')
             getTask:function(projectId){
                 var projectRef = groupTasksRef + '/' + 'panacloud' + '/' + 'panaswift' + '/' + projectId;
                 ref = new Firebase(projectRef);
-                ret = $firebaseArray(ref)
+                var data = []
+                ref.on('value',function(dataSnapShot){
+                data = dataSnapShot.exportVal();
+                })
+
+                console.log(data)
+
+
+
+
+               ret = $firebaseArray(ref)
+                //ret.$loaded(
+                //    function(x) {
+                //        console.log(x) // true
+                //    }, function(error) {
+                //        console.error("Error:", error);
+                //    });
             },
 
             //getTask: function(projectId) {
@@ -88,6 +104,7 @@ angular.module('task.services')
            // },
 
             getData: function(){
+
                 return ret
             }
         }

@@ -115,8 +115,8 @@
 
         <div layout="row" style=" background-color: #f2efef ;" flex id="mainCart" >
 
-            <md-list ng-repeat="(listName, list) in checking.models.lists"  class="list-style" >
-                    <md-card id="card-alignment" ng-init=" Outerindex = $index ">
+            <md-list ng-repeat="(listName, list) in checking.models.lists"  class="list-style">
+                    <md-card id="card-alignment" ng-init=" Outerindex = $index " >
 
                     <!--<md-card-content style=" max-height: 607px;-->
                                               <!--overflow: auto;-->
@@ -125,7 +125,7 @@
                         <md-toolbar  layout="row" class="{{list.color}}" >
                             <div>
                                 <h2 class="md-toolbar-tools" >
-                                    <span> {{ list.name }}</span> <span style="color: grey;"> 0</span>
+                                    <span > {{ list.name }}</span> <span style="color: grey;"> 0</span>
                                 </h2>
                             </div>
 
@@ -153,10 +153,14 @@
 
 
                         <md-content style="background-color: #cccccc;" id="input-toolbar">
-                            <ul dnd-list="list.task" style="padding: 0 5px 0 5px !important; " id="hell">
-                                <md-card  class="md-3-line checking" ng-repeat="item in list.task" dnd-draggable="item"
+
+                            <ul dnd-list="listName" style="padding: 0 5px 0 5px !important; " id="hell">
+                                <md-card  class="md-3-line checking" ng-repeat="(listIndex,item) in list.task"
+                                         dnd-draggable="item"
                                          dnd-moved="list.splice($index, 1)"
                                          dnd-drag-value = "listIndex"
+                                         dnd-selected-list="listName"
+                                         dnd-project-id="project.$id"
                                          dnd-effect-allowed="move"
                                          dnd-selected="models.selected = item"
                                          ng-class="{'selected': models.selected === item}">
@@ -177,7 +181,7 @@
                                 </md-card>
 
                             </ul>
-                            <md-toolbar style="background-color: #cccccc" >
+                            <!--<md-toolbar style="background-color: #cccccc" >-->
 
                                 <!--
                                                                 <div layout="column" layout-align="center center" id="testing-input" ng-click="checking.inputClick()">
