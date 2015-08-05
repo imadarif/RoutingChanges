@@ -61,7 +61,7 @@
 <md-toolbar style="background-color: white ;border-bottom: 1px solid #cccccc;">
 
         <div class="md-toolbar-tools" id="hello">
-        <md-select ng-change="checking.Select(project.$id)" ng-model="project" md-on-open="checking.loadUsers()" style="width: 200px; color: grey">
+        <md-select ng-change="checking.Select(project.$id)" ng-model="project" md-on-open="checking.loadUsers()" style="width: 300px; color: grey">
             <md-select-label >{{ project ? project.title : 'Project Name' }}</md-select-label>
             <md-option ng-value="project" ng-repeat="project in checking.projects">{{project.title}}</md-option>
         </md-select>
