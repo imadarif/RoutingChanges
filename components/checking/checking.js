@@ -22,7 +22,7 @@ angular.module("task.controllers")
     //})
 
     .controller("CheckingController", function($mdDialog, $timeout, retreiveData, $mdSidenav, $mdUtil, $log,$q,addTask) {
-        var test = {};
+
 
 
         var $scope = this;
@@ -351,8 +351,22 @@ angular.module("task.controllers")
 
             return $timeout(function() {
                 var data  = retreiveData.getData();
-                $scope.models.lists = data[1]
+
+      //  for(var i=0; i<data.length; i++) {
+        //    if(i == 1) {
+        //        $scope.models.lists.push({setting: data})
+        //        $scope.models.lists.push({tasks : data[i].task})
+        //    }
+        //    $scope.models.tasks.push(data[i].task)
+     //   }
+/*
+                $scope.models.lists[1].push({setting: data});
+*/
                 console.log(data)
+        $scope.models.lists = data[1]
+
+//                $scope.models.tasks = data.task
+
             }, 550);
 
         //    $timeout(function () {
