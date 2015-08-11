@@ -164,6 +164,10 @@ angular.module("task.controllers")
             addTask.createTask(projectId,listName,$scope.listTask)
         }
 
+
+
+
+
         $scope.cancelTask = function(ind){
 
             console.log(ind)
@@ -216,7 +220,7 @@ angular.module("task.controllers")
             //console.log(md_content_data);
             //
             //var md_toolbar_input = md_content_data[1].children;
-            //console.log(md_toolbar_input);
+            console.log(md_toolbar_element)
 
 
 
