@@ -168,11 +168,11 @@ angular.module("task.controllers")
 
 
 
+
         $scope.cancelTask = function(ind){
 
             console.log(ind)
             var mainCartElement = angular.element( document.querySelector('#mainCart'));
-           // console.log(mainCartElement);
 
             var md_list_element = mainCartElement.children(1);
 
@@ -220,11 +220,6 @@ angular.module("task.controllers")
             //console.log(md_content_data);
             //
             //var md_toolbar_input = md_content_data[1].children;
-            console.log(md_toolbar_element)
-
-
-
-
 
             var md_toolbar_change = md_toolbar_element[2];
             console.log(md_toolbar_change);

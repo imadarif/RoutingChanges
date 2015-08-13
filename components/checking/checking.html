@@ -102,21 +102,25 @@
 
         <span flex></span>
 
-        <md-button class="md-raised md-primary" ng-click="checking.addProjectList(project.$id,ev)">
-            BUTTON 1<!--<md-icon md-svg-icon="img/icons/favorite.svg" style="color: greenyellow;"></md-icon>-->
+        <md-button ng-click="checking.addProjectList(project.$id,ev)">
+            <md-icon md-svg-src = "img/abc.svg"></md-icon>
+            <!--<md-icon md-svg-icon="img/icons/favorite.svg" style="color: greenyellow;"></md-icon>-->
         </md-button>
 
-        <ng-md-icon icon="menu" style="fill: grey" size="24" ng-click="checking.toggleRight()"></ng-md-icon>
+        <ng-md-icon icon="menu" style="fill: grey" size="24" ng-click="checking.toggleRight()">
+            <md-icon md-svg-src = "img/abcs.svg"></md-icon>
+
+        </ng-md-icon>
 
     </div>
 </md-toolbar>
 
 
 
-<div layout="row" style=" background-color: #f2efef;width: auto;overflow-x: scroll" flex id="mainCart" >
+        <div layout="row" style=" background-color: #f2efef; width:auto; overflow-x: scroll" flex id="mainCart" >
 
             <md-list ng-repeat="(listName, list) in checking.models.lists"  class="list-style">
-                    <md-card id="card-alignment" ng-init=" Outerindex = $index " style="width: 444px">
+                    <md-card id="card-alignment" ng-init=" Outerindex = $index " style="width: 325px">
 
                     <!--<md-card-content style=" max-height: 607px;-->
                                               <!--overflow: auto;-->
@@ -154,7 +158,7 @@
 
                         <md-content style="background-color: #cccccc;" id="input-toolbar">
 
-                            <ul dnd-list="listName" style="padding: 8px 5px 0 5px !important; " id="hell">
+                            <ul dnd-list="listName" style="padding:5px !important; " id="hell">
                                 <md-card  class="md-3-line checking" ng-repeat="(listIndex,item) in list.task"
                                          dnd-draggable="item"
                                          dnd-moved="list.splice($index, 1)"
@@ -221,9 +225,9 @@
 
 
                        <md-toolbar style="background-color: #cccccc">
-                            <div layout="column" layout-align="center center" id="testing-input" ng-show = "" ng-click="checking.inputClick(listName,$index,Outerindex)">
+                            <div layout="column" layout-align="center center" id="testing-input" ng-click="checking.inputClick(listName,$index,Outerindex)">
                                 <div style="width: 100%">
-                                    <input placeholder="Create new task...." class="input-box" >
+                                    <input placeholder="Create new task...." class="input-box">
                                 </div>
 
                                 <div  class="input-button-transition">
@@ -235,13 +239,6 @@
                                 </div>
                             </div>
                         </md-toolbar>
-
-<!--
-                    </md-card-content>
--->
-
-
-
 
                 </md-card>
 
