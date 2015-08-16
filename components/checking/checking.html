@@ -56,8 +56,6 @@
     </div>
 </section>
 
-
-
 <md-toolbar style="background-color: white ;border-bottom: 1px solid #cccccc;">
 
         <div class="md-toolbar-tools" id="hello">
@@ -102,12 +100,12 @@
 
         <span flex></span>
 
-        <md-button ng-click="checking.addProjectList(project.$id,ev)">
-            <md-icon md-svg-src = "img/abc.svg"></md-icon>
+        <md-button class="md-raised md-primary" ng-click="checking.addProjectList(project.$id,ev)">
+            BUTTON 1<!--<md-icon md-svg-icon="img/icons/favorite.svg" style="color: greenyellow;"></md-icon>-->
             <!--<md-icon md-svg-icon="img/icons/favorite.svg" style="color: greenyellow;"></md-icon>-->
         </md-button>
 
-        <ng-md-icon icon="menu" style="fill: grey" size="24" ng-click="checking.toggleRight()">
+        <ng-md-icon icon="menu" style="fill: grey" size="24" ng-click="checking.toggleRight()"></ng-md-icon>
             <md-icon md-svg-src = "img/abcs.svg"></md-icon>
 
         </ng-md-icon>
@@ -115,24 +113,22 @@
     </div>
 </md-toolbar>
 
-
-
-        <div layout="row" style=" background-color: #f2efef; width:auto; overflow-x: scroll" flex id="mainCart" >
+<div layout="row" style=" background-color: #f2efef;width: auto;overflow-x: scroll" flex id="mainCart" >
 
             <md-list ng-repeat="(listName, list) in checking.models.lists"  class="list-style">
-                    <md-card id="card-alignment" ng-init=" Outerindex = $index " style="width: 325px">
+                    <md-card id="card-alignment" ng-init=" Outerindex = $index " style="width: 444px">
 
                     <!--<md-card-content style=" max-height: 607px;-->
                                               <!--overflow: auto;-->
                                               <!--padding: 0;">-->
 
                         <md-toolbar  layout="row" class="{{list.color}}" >
+
                             <div>
                                 <h2 class="md-toolbar-tools" >
                                     <span > {{ list.name }}</span> <span style="color: grey;"> 0</span>
                                 </h2>
                             </div>
-
 
                             <div class="color-dialog-position">
                                 <md-select class="md-toolbar-tools custom-md-select" ng-model="">
@@ -155,10 +151,8 @@
 
                         </md-toolbar>
 
-
                         <md-content style="background-color: #cccccc;" id="input-toolbar">
-
-                            <ul dnd-list="listName" style="padding:5px !important; " id="hell">
+                            <ul dnd-list="listName" style="padding: 8px 5px 0 5px !important; " id="hell">
                                 <md-card  class="md-3-line checking" ng-repeat="(listIndex,item) in list.task"
                                          dnd-draggable="item"
                                          dnd-moved="list.splice($index, 1)"
@@ -172,7 +166,6 @@
                                     <md-card-content>
                                         <div class="md-list-item-text" >
                                             <h3>{{item.task}}</h3>
-                                            <!--<p>{{item.desc}}</p>-->
                                              <div>
                                                  <ng-md-icon icon="visibility" style="fill: grey" size="20"></ng-md-icon>
                                                  <ng-md-icon icon="menu" style="fill: grey" size="20"></ng-md-icon>
@@ -181,69 +174,33 @@
                                              </div>
                                         </div>
                                     </md-card-content>
-
                                 </md-card>
-
                             </ul>
-                            <!--<md-toolbar style="background-color: #cccccc" >-->
-
-                                <!--
-                                                                <div layout="column" layout-align="center center" id="testing-input" ng-click="checking.inputClick()">
-                                -->
-                                <!-- <div style="width: 100%">
-                                     <input placeholder="Create new task...." class="input-box">
-                                 </div>
-
-                                 <div style="width: 100%" class="input-button-transition">
-
-                                     <input style="width: 100%">
-                                     <md-button class="md-raised md-primary" style="background-color: green">Create</md-button>
-                                     <md-button class="md-raised md-primary">Cancel</md-button>
-                                 </div>
-                             -->
-
-                                <!--<input type="checkbox"  id="toggle" />-->
-                                <!--<label for="toggle" style="cursor: text;content:' '" ng-click="checking.inputClick(Outerindex)"></label>-->
-
-
-                                <!--<div class="message">-->
-                                    <!--<div layout="row" layout-align="center center">-->
-                                        <!--<input type="text"  style="width: 95%;" ng-model="checking.listTask.task">-->
-                                    <!--</div>-->
-
-
-                                    <!--<md-button class="md-raised" ng-click="checking.newTask(project.$id,listName)">Create</md-button>-->
-                                    <!--<md-button>Cancel</md-button>-->
-
-                                <!--</div>-->
-
-                            <!--</md-toolbar>-->
-
                         </md-content>
 
-
-
-
                        <md-toolbar style="background-color: #cccccc">
-                            <div layout="column" layout-align="center center" id="testing-input" ng-click="checking.inputClick(listName,$index,Outerindex)">
+                            <div layout="column" layout-align="center center" id="testing-input" ng-show = "" ng-click="checking.inputClick(listName,$index,Outerindex)">
                                 <div style="width: 100%">
-                                    <input placeholder="Create new task...." class="input-box">
+                                    <input placeholder="Create new task...." class="input-box" >
                                 </div>
 
                                 <div  class="input-button-transition">
-
                                     <input style="width: 100%" ng-model="checking.listTask.task">
                                     <md-button class="md-raised md-primary" style="background-color: green" ng-click="checking.newTask(project.$id,listName)">Create</md-button>
                                     <md-button class="md-raised " ng-click="checking.cancelTask(Outerindex)">Cancel</md-button>
-
                                 </div>
                             </div>
                         </md-toolbar>
 
+<!--
+                    </md-card-content>
+-->
+
+
+
+
                 </md-card>
-
             </md-list>
-
         </div>
 
 

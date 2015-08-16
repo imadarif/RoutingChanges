@@ -185,6 +185,9 @@ angular.module("task.controllers")
             var md_toolbar_change = md_toolbar_element[2];
            // console.log(md_toolbar_change);
 
+
+
+
             var md_main_cont = md_toolbar_change.children;
 
            // console.log(md_main_cont)
@@ -192,10 +195,9 @@ angular.module("task.controllers")
 
             var md_input = md_main_cont[0].children;
            // console.log(md_input)
-
-            md_input[0].style.display = 'block';
             md_input[1].className = "input-button-transition"
 
+            md_input[0].style.display = 'block';
             console.log(md_input)
         }
 
@@ -220,6 +222,9 @@ angular.module("task.controllers")
             //console.log(md_content_data);
             //
             //var md_toolbar_input = md_content_data[1].children;
+
+            console.log(md_toolbar_element)
+
 
             var md_toolbar_change = md_toolbar_element[2];
             console.log(md_toolbar_change);
@@ -358,7 +363,19 @@ angular.module("task.controllers")
                 $scope.models.lists[1].push({setting: data});
 */
                 console.log(data)
+
+
+
+                for(var i = 0; i < data[1].length; i++) {
+                    console.log(data[i]);
+                    for (var key in data[i]){
+                        console.log(data[i][key]);
+                    }
+                }
         $scope.models.lists = data[1]
+
+
+
 
 //                $scope.models.tasks = data.task
 
